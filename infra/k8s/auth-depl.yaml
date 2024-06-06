@@ -14,20 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: mroc/auth
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: auth-srv
-spec:
-  selector:
-    app: auth
-  ports:
-    - name: auth
-      protocol: TCP
-      port: 3000
-      targetPort: 3000
+          image: us.gcr.io/microservice-nodejs-2/auth
 ---
 apiVersion: v1
 kind: Service
