@@ -28,7 +28,7 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Run `gcloud container clusters get-credentials autopilot-microservice-nodejs-2 --location europe-west3`
 - Run `kubectl config current-context`
 - Visit https://console.cloud.google.com/marketplace/product/google/cloudbuild.googleapis.com?q=search&referrer=search&hl=en&project=microservice-nodejs-2
-Enable Cloud Build
+- Enable Cloud Build
 - Run `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/cloud/deploy.yaml` (https://kubernetes.github.io/ingress-nginx/deploy/)
 - Visit https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers?referrer=search&hl=en&project=microservice-nodejs-2
 - Get IP address of load balancer
