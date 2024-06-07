@@ -37,7 +37,7 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 
 ## NPM
 
-### 1. express-validator
+### express-validator
 
 https://express-validator.github.io/docs/
 
@@ -46,3 +46,13 @@ https://express-validator.github.io/docs/
  ```
 
 Add error handlers `error-handlers.ts`
+
+### ExpressJS Async Errors
+
+Allow express to catch errors in async handlers.
+
+https://github.com/davidbanham/express-async-errors
+
+```
+npm install express-async-errors
+```
