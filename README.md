@@ -56,3 +56,10 @@ https://github.com/davidbanham/express-async-errors
 ```
 npm install express-async-errors
 ```
+
+### Mongo
+
+```
+npm install mongoose
+npm install @types/mongoose
+```
