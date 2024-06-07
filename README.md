@@ -34,6 +34,17 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Get IP address of load balancer
 - Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
 
+## Kubernetes
+
+### Secret
+
+Secrets are created using an imperative command because they are sensitive data.
+The secret is then forwarded as env variable to the pod in the deployment file.
+
+```
+kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>
+kubectl get secrets
+```
 
 ## NPM
 
@@ -60,6 +71,21 @@ npm install express-async-errors
 ### Mongo
 
 ```
-npm install mongoose
-npm install @types/mongoose
+npm install mongoose @types/mongoose
+```
+
+### Cookie session
+
+https://github.com/expressjs/cookie-session
+
+```
+npm install cookie-session @types/cookie-session
+```
+
+### JWT
+
+https://github.com/auth0/node-jsonwebtoken
+
+```
+npm install jsonwebtoken @types/jsonwebtoken
 ```
