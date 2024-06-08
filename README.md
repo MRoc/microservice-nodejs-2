@@ -97,3 +97,11 @@ Allows to test a express server and routes.
 ```
 npm install --save-dev jest @types/jest supertest @types/supertest ts-jest mongodb-memory-server
 ```
+
+### Next JS
+
+Install Next.js:
+
+```
+npx create-next-app@latest
+```
