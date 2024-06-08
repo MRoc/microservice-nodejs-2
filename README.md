@@ -89,3 +89,11 @@ https://github.com/auth0/node-jsonwebtoken
 ```
 npm install jsonwebtoken @types/jsonwebtoken
 ```
+
+### Tests
+
+Allows to test a express server and routes.
+
+```
+npm install --save-dev jest @types/jest supertest @types/supertest ts-jest mongodb-memory-server
+```
