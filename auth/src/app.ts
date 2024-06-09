@@ -8,9 +8,11 @@ import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
 import { errorHandler } from "./middlewares/error-handlers";
 import { NotFoundError } from "./errors/not-found-error";
+const cors = require("cors");
 
 const app = express();
 app.set("trust proxy", true);
+app.use(cors());
 app.use(json());
 app.use(
   cookieSession({

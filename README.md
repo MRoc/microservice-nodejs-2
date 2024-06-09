@@ -34,6 +34,24 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Get IP address of load balancer
 - Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
 
+## Locally
+
+- Switch kubernetes context to local
+- Create secret `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>`
+- Check secret `kubectl get secrets`
+- Edit `C:\Windows\System32\drivers\etc\hosts` to `127.0.0.1 microservice-nodejs-2-dev.com`
+- Run `kubectl apply -f ./infra/k8s/ingress-srv.yaml`
+- Run `kubectl apply -f ./infra/k8s/auth-mongo-depl.yaml`
+- Run `make docker-build`
+- Run `docker build -t mroc/auth ./auth/`
+- Run `docker push mroc/auth`
+- Change `image: us.gcr.io/microservice-nodejs-2/auth` to `image: mroc/auth`
+- Run `kubectl apply -f ./infra/k8s/auth-depl.yaml`
+- Change `const response = await axios[method](url, body);` to `const response = await axios[method]('http://microservice-nodejs-2-dev.com' + url, body);`
+
+- `cd ./client`
+- `npm run dev`
+
 ## Kubernetes
 
 ### Secret
@@ -105,4 +123,11 @@ Install Next.js:
 ```
 npx create-next-app@latest
 npm install axios @types/axios
+```
+
+
+### Cors
+
+```
+npm install cors @types/cors
 ```
