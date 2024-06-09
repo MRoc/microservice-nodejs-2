@@ -1,18 +1,18 @@
 import axios from 'axios';
+import { headers } from "next/headers";
 
 const fetchCurrentUser = async () => {
-    if (typeof window === 'undefined') {
-    console.log(`+-- Server`)
+  if (typeof window === 'undefined') {
     const { data } = await axios.get(
       'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser', {
         headers: {
-          Host: 'microservice-nodejs-2-dev.com'
+          Host: headers().get('Host'),
+          Cookie: headers().get('Cookie'),
       }
     });
     return data;
   }
   else {
-    console.log(`+-- Client`)
     const { data } = await axios.get('/api/users/currentuser');
     return data;
   }
