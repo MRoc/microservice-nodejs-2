@@ -47,7 +47,8 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Run `docker push mroc/auth`
 - Change `image: us.gcr.io/microservice-nodejs-2/auth` to `image: mroc/auth`
 - Run `kubectl apply -f ./infra/k8s/auth-depl.yaml`
-- Change `const response = await axios[method](url, body);` to `const response = await axios[method]('http://microservice-nodejs-2-dev.com' + url, body);`
+- Change `const response = await axios[method](url, body);` to `const response = await axios[method]('https://microservice-nodejs-2-dev.com' + url, body);`
+- Once visit `https://microservice-nodejs-2-dev.com` and accepd insecure connection
 
 - `cd ./client`
 - `npm run dev`
