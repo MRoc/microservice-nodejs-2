@@ -103,5 +103,5 @@ npm install --save-dev jest @types/jest supertest @types/supertest ts-jest mongo
 Install Next.js:
 
 ```
-npx create-next-app@latest
+npx create-next-app@latest axios
 ```
