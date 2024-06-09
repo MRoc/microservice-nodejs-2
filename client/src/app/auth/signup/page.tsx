@@ -1,23 +1,24 @@
 "use client";
 
 import { useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation'
 import useRequest from '../../../hooks/use-request';
 
 export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter()
   const { doRequest, errors } = useRequest({
     url:'/api/users/signup',
     method: 'post',
     body: {
       email, password
-    }
+    },
+    onSuccess: (data: any) => router.push('/')
   })
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     doRequest();
   }; 
   return (

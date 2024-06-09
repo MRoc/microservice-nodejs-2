@@ -10,10 +10,12 @@ export default function useRequest({
   url,
   method,
   body,
+  onSuccess,
 }: {
   url: string;
   method: "post" | "get" | "put" | "delete";
   body: any;
+  onSuccess?: (data: any) => void;
 }) {
   const [errors, setErrors] = useState<JSX.Element | null>(null);
 
@@ -21,6 +23,11 @@ export default function useRequest({
     try {
       setErrors(null);
       const response = await axios[method](url, body);
+
+      if (onSuccess) {
+        onSuccess(response.data);
+      }
+
       return response.data;
     } catch (err) {
       if (axios.isAxiosError(err)) {
