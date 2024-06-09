@@ -7,6 +7,8 @@ k8s-restart:
 	kubectl rollout restart deployment auth-depl
 k8s-delete:
 	kubectl delete deployment auth-depl
+	kubectl delete deployment auth-mongo-depl
+	kubectl delete deployment client-depl
 k8s-status:
 	kubectl get deployments
 	kubectl get pods
