@@ -22,7 +22,7 @@ export default function useRequest({
   const doRequest = async () => {
     try {
       setErrors(null);
-      const response = await axios[method]('https://microservice-nodejs-2-dev.com' + url, body);
+      const response = await axios[method](url, body);
 
       if (onSuccess) {
         onSuccess(response.data);

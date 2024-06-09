@@ -53,6 +53,8 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - `cd ./client`
 - `npm run dev`
 
+- If having problem with self signed certificate while rendering NextJS server side on windows, run `$env:NODE_TLS_REJECT_UNAUTHORIZED=0` first.
+
 ## Kubernetes
 
 ### Secret
@@ -64,6 +66,18 @@ The secret is then forwarded as env variable to the pod in the deployment file.
 kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>
 kubectl get secrets
 ```
+
+### Namespaces
+
+```
+kubectl get namespace
+kubectl get services -n <namespace>
+http://service.namespace.svc.cluster.local
+```
+
+ingress-nginx-controller
+http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
+
 
 ## NPM
 
