@@ -1,9 +1,11 @@
+"use client";
+
 import Link from 'next/link';
 import React from 'react'
 import buildClient from '../api/build-client';
 
 const Header = async () => {
-  const client = buildClient();
+  const client = await buildClient();
   const { data } = await client.get('/api/users/currentuser');
 
   const links = [
@@ -13,13 +15,11 @@ const Header = async () => {
   ];
 
   return <div>
-    <Link href="/">Home</Link>
-
+    <Link className="mr-8" href="/">Home</Link>
     <span>
       {links.map(link => link.visible &&
-        <Link className="pr-2" key={link.href} href={link.href}>{link.label}</Link>)}
+        <Link className="mr-8" key={link.href} href={link.href}>{link.label}</Link>)}
     </span>
-
   </div>
 };
  
