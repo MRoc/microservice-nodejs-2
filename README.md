@@ -79,6 +79,18 @@ ingress-nginx-controller
 http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
 
 
+## How to add a service
+
+- Create a new folder in the root directory
+- Add package.json and install dependencies
+- Add Dockerfile
+- Create index.ts to run the service
+- Build image, push to docker hub
+- Update k8s deployment file
+- Update skaffold file
+- Write k8s file for services (mongodb, service, ...)
+
+
 ## NPM
 
 ### express-validator
