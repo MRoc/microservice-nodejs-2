@@ -17,6 +17,14 @@ build:
         manual:
           - src: '/src/**/*.js'
             dest: .
+    - image: us.gcr.io/microservice-nodejs-2/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '/src/**/*.js'
+            dest: .
     - image: us.gcr.io/microservice-nodejs-2/client
       context: client
       docker:
