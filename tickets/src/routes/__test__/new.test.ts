@@ -1,5 +1,6 @@
 import request from "supertest";
 import { app } from "../../app";
+import { Ticket } from "../../models/ticket";
 
 it("has a route handler listening to /api/tickets for post requests", async () => {
   const response = await request(app).post("/api/tickets").send({});
@@ -40,24 +41,25 @@ it("returns error if invalid price is provided", async () => {
     .expect(400);
 });
 
-it("creates a ticket with valid params", async () => {});
+it("creates a ticket with valid params", async () => {
+  const ticketsBefore = await Ticket.find({});
+  expect(ticketsBefore.length).toEqual(0);
 
-// it("signs in when valid credentials", async () => {
-//   await request(app)
-//     .post("/api/tickets/signup")
-//     .send({
-//       email: "test@test.com",
-//       password: "password",
-//     })
-//     .expect(201);
+  const title = "Title";
+  const price = 20;
 
-//   const response = await request(app)
-//     .post("/api/users/signin")
-//     .send({
-//       email: "test@test.com",
-//       password: "password",
-//     })
-//     .expect(200);
+  const response = await request(app)
+    .post("/api/tickets")
+    .set("Cookie", signin())
+    .send({
+      title,
+      price,
+    });
 
-//   expect(response.get("Set-Cookie")).toBeDefined();
-// });
+  expect(response.status).toEqual(201);
+  expect(response.body.title).toBe(title);
+  expect(response.body.price).toBe(price);
+
+  const ticketsAfter = await Ticket.find({});
+  expect(ticketsAfter.length).toEqual(1);
+});
