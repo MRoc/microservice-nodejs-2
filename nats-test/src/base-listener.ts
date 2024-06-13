@@ -34,7 +34,11 @@ export abstract class BaseListener<T extends Event> {
     );
 
     subsciption.on("message", (msg: Message) => {
-      console.log(`Message received: ${this.subject} / ${this.queueGroupName}`);
+      console.log(
+        `BaseListener ${msg.getSequence()} received: ${this.subject} / ${
+          this.queueGroupName
+        }`
+      );
 
       const data = this.parseMessage(msg);
       this.onMessage(data, msg);

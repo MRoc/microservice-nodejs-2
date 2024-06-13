@@ -12,9 +12,7 @@ export class TicketCreatedListener extends BaseListener<TicketCreatedEvent> {
   }
 
   onMessage(data: TicketCreatedEvent["data"], msg: Message) {
-    console.log("+-- Event data!", data);
-    console.log(`+-- ${data.title}`);
-    console.log(`+-- ${data.price}`);
+    console.log("TicketCreatedListener", data);
     msg.ack();
   }
 }
