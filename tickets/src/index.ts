@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { app } from "./app";
+import { natsWrapper } from "@mroc/ex-ms-common";
 
 const start = async () => {
   try {
@@ -9,6 +10,14 @@ const start = async () => {
     if (!process.env.MONGO_URI) {
       throw new Error("MONGO_URI not found");
     }
+
+    console.log(`Connecting to NATS...`);
+    await natsWrapper.connect(
+      "ticketing",
+      "ticket-service",
+      "http://nats-srv:4222"
+    );
+    console.log("Connected to NATS!");
 
     console.log(`Connecting to MongoDb '${process.env.MONGO_URI}'...`);
     await mongoose.connect(process.env.MONGO_URI);
