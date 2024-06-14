@@ -6,6 +6,18 @@ import jwt from "jsonwebtoken";
 
 let mongo: MongoMemoryServer;
 
+jest.mock("@mroc/ex-ms-common", () => ({
+  ...jest.requireActual("@mroc/ex-ms-common"),
+  natsWrapper: {
+    connect: jest.fn().mockResolvedValue(undefined),
+    client: jest.fn().mockReturnValue({
+      publish(subject: any, data: any, callback: () => void) {
+        callback();
+      },
+    }),
+  },
+}));
+
 beforeAll(async () => {
   process.env.JWT_KEY = "Abcd1234!";
 

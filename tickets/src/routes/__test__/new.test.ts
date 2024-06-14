@@ -2,18 +2,6 @@ import request from "supertest";
 import { app } from "../../app";
 import { Ticket } from "../../models/ticket";
 
-jest.mock("@mroc/ex-ms-common", () => ({
-  ...jest.requireActual("@mroc/ex-ms-common"),
-  natsWrapper: {
-    connect: jest.fn().mockResolvedValue(undefined),
-    client: jest.fn().mockReturnValue({
-      publish(subject: any, data: any, callback: () => void) {
-        callback();
-      },
-    }),
-  },
-}));
-
 it("has a route handler listening to /api/tickets for post requests", async () => {
   const response = await request(app).post("/api/tickets").send({});
   expect(response.status).not.toEqual(404);
