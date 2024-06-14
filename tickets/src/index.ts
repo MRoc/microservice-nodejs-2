@@ -7,15 +7,26 @@ const start = async () => {
     if (!process.env.JWT_KEY) {
       throw new Error("JWT_KEY not found");
     }
+
     if (!process.env.MONGO_URI) {
       throw new Error("MONGO_URI not found");
     }
 
+    if (!process.env.NATS_URI) {
+      throw new Error("NATS_URI not found");
+    }
+    if (!process.env.NATS_CLUSTER_ID) {
+      throw new Error("NATS_CLUSTER_ID not found");
+    }
+    if (!process.env.NATS_CLIENT_ID) {
+      throw new Error("NATS_CLIENT_ID not found");
+    }
+
     console.log(`Connecting to NATS...`);
     await natsWrapper.connect(
-      "ticketing",
-      "ticket-service",
-      "http://nats-srv:4222"
+      process.env.NATS_CLUSTER_ID,
+      process.env.NATS_CLIENT_ID,
+      process.env.NATS_URI
     );
     console.log("Connected to NATS!");
 
