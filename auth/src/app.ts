@@ -7,7 +7,7 @@ import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
 import { errorHandler, NotFoundError } from "@mroc/ex-ms-common";
-const cors = require("cors");
+import cors from "cors";
 
 const app = express();
 app.set("trust proxy", true);
@@ -25,7 +25,7 @@ app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
 
-app.all("*", async () => {
+app.all("*", async (req, res) => {
   throw new NotFoundError();
 });
 
