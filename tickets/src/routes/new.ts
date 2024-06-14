@@ -3,7 +3,7 @@ import { body } from "express-validator";
 import { requireAuth } from "@mroc/ex-ms-common";
 import { validateRequest } from "@mroc/ex-ms-common";
 import { Ticket } from "../models/ticket";
-import { TickerCreatedPublisher } from "../events/publishers/ticket-created-publisher";
+import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publisher";
 import { natsWrapper } from "@mroc/ex-ms-common";
 
 const router = express.Router();
@@ -29,7 +29,7 @@ router.post(
 
     await ticket.save();
 
-    new TickerCreatedPublisher(natsWrapper.client()).publish({
+    await new TicketCreatedPublisher(natsWrapper.client()).publish({
       id: ticket.id,
       title: ticket.title,
       price: ticket.price,

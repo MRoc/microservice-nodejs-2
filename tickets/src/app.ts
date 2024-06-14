@@ -1,8 +1,8 @@
 import express from "express";
-require("express-async-errors");
+import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
-const cors = require("cors");
+import cors from "cors";
 import { currentUser, errorHandler, NotFoundError } from "@mroc/ex-ms-common";
 import { createTicketRouter } from "./routes/new";
 import { showTicketRouter } from "./routes/show";
@@ -26,7 +26,7 @@ app.use(showTicketRouter);
 app.use(indexTicketRouter);
 app.use(updateTicketRouter);
 
-app.all("*", () => {
+app.all("*", async (req, res) => {
   throw new NotFoundError();
 });
 

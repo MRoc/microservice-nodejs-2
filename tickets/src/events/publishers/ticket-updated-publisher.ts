@@ -4,6 +4,6 @@ import {
   TicketUpdatedEvent,
 } from "@mroc/ex-ms-common/build";
 
-export class TickerUpdatedPublisher extends BasePublisher<TicketUpdatedEvent> {
+export class TicketUpdatedPublisher extends BasePublisher<TicketUpdatedEvent> {
   readonly subject = Subjects.TicketUpdated;
 }
