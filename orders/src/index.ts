@@ -22,7 +22,9 @@ const start = async () => {
       throw new Error("NATS_CLIENT_ID not found");
     }
 
-    console.log(`Connecting to NATS...`);
+    console.log(
+      `Connecting to NATS '${process.env.NATS_URI}' cluster '${process.env.NATS_CLUSTER_ID}' with ID '${process.env.NATS_CLIENT_ID}'...`
+    );
     await natsWrapper.connect(
       process.env.NATS_CLUSTER_ID,
       process.env.NATS_CLIENT_ID,
