@@ -5,8 +5,10 @@ import {
   NotFoundError,
   requireAuth,
   NotAuthorizedError,
+  natsWrapper,
 } from "@mroc/ex-ms-common/build";
 import { Ticket } from "../models/ticket";
+import { TickerUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
 
 const router = express.Router();
 
@@ -36,6 +38,13 @@ router.put(
     });
 
     await ticket.save();
+
+    new TickerUpdatedPublisher(natsWrapper.client()).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+    });
 
     res.status(200).send(ticket);
   }

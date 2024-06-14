@@ -19,6 +19,13 @@ const start = async () => {
     );
     console.log("Connected to NATS!");
 
+    natsWrapper.client().on("close", () => {
+      console.log(`NATS connection closed!`);
+      process.exit();
+    });
+    process.on("SIGINT", () => natsWrapper.client().close());
+    process.on("SIGTERM", () => natsWrapper.client().close());
+
     console.log(`Connecting to MongoDb '${process.env.MONGO_URI}'...`);
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to MongoDb!");

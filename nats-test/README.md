@@ -8,8 +8,8 @@ npx tsc --init
 
 ```
 kubectl get pods
-kubectl port-forward nats-depl-649878db65-px5tg 4222:4222
-kubectl port-forward nats-depl-649878db65-px5tg 8222:8222
+kubectl port-forward nats-depl-7b89b4bb96-h8jpv 4222:4222
+kubectl port-forward nats-depl-7b89b4bb96-h8jpv 8222:8222
 npm run listen
 npm run publish
 http://localhost:8222/streaming
