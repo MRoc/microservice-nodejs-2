@@ -9,9 +9,13 @@ jest.mock("@mroc/ex-ms-common", () => ({
   natsWrapper: {
     connect: jest.fn().mockResolvedValue(undefined),
     client: jest.fn().mockReturnValue({
-      publish(subject: any, data: any, callback: () => void) {
-        callback();
-      },
+      publish: jest
+        .fn()
+        .mockImplementation(
+          (subject: string, data: string, callback: () => void) => {
+            callback();
+          }
+        ),
     }),
   },
 }));
@@ -25,6 +29,8 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+  jest.clearAllMocks();
+
   const collections = await mongoose.connection.db.collections();
 
   for (let collection of collections) {
