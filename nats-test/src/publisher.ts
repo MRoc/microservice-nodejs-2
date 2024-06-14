@@ -1,18 +1,17 @@
 import nats from "node-nats-streaming";
 import { TicketCreatedPublisher } from "./ticket-created-publisher";
+import { natsWrapper } from "./nats-wrapper";
 
 console.clear();
 
 console.log(`Publisher starting...`);
 
-const stan = nats.connect("ticketing", "abc", {
-  url: "http://localhost:4222",
-});
+const run = async () => {
+  await natsWrapper.connect("ticketing", "abc", "http://localhost:4222");
 
-stan.on("connect", async () => {
   console.log(`Publisher connected to NATS`);
 
-  const publisher = new TicketCreatedPublisher(stan);
+  const publisher = new TicketCreatedPublisher(natsWrapper.client());
 
   try {
     await publisher.publish({
@@ -23,4 +22,6 @@ stan.on("connect", async () => {
   } catch (err) {
     console.error(err);
   }
-});
+};
+
+run();
