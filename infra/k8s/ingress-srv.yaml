@@ -25,6 +25,13 @@ spec:
                 name: tickets-clusterip-srv
                 port:
                   number: 3000
+          - path: /api/orders/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: orders-clusterip-srv
+                port:
+                  number: 3000
           - path: /(.*)
             pathType: ImplementationSpecific
             backend:
