@@ -3,13 +3,11 @@ import Mongoose from "mongoose";
 interface TicketAttrs {
   title: string;
   price: number;
-  userId: string;
 }
 
-interface TicketDoc extends Mongoose.Document {
+export interface TicketDoc extends Mongoose.Document {
   title: string;
   price: number;
-  userId: string;
 }
 
 interface TicketModel extends Mongoose.Model<TicketDoc> {
@@ -24,10 +22,6 @@ const ticketSchema = new Mongoose.Schema(
     },
     price: {
       type: Number,
-      required: true,
-    },
-    userId: {
-      type: String,
       required: true,
     },
   },
