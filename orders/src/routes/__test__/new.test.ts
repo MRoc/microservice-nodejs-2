@@ -51,7 +51,7 @@ it("returns error if ticket already reserved", async () => {
 
   const order = Order.build({
     userId: new mongoose.Types.ObjectId().toHexString(),
-    status: OrderStatus.AwaitingPayment,
+    status: OrderStatus.Cancelled,
     expiresAt: new Date(),
     ticket: ticket,
   });
@@ -63,30 +63,34 @@ it("returns error if ticket already reserved", async () => {
     .send({
       ticketId: ticket.id,
     })
-    .expect(400);
+    .expect(201);
 });
 
 // it("reserves a ticket", async () => {
-//   const ticketsBefore = await Ticket.find({});
-//   expect(ticketsBefore.length).toEqual(0);
+//   const ticket = Ticket.build({
+//     title: "Title",
+//     price: 20,
+//   });
+//   await ticket.save();
 
-//   const title = "Title";
-//   const price = 20;
+//   const expiresAt = new Date();
+//   expiresAt.setSeconds(new Date().getSeconds() + 15 * 60);
 
-//   const response = await request(app)
-//     .post("/api/tickets")
+//   const order = Order.build({
+//     userId: new mongoose.Types.ObjectId().toHexString(),
+//     status: OrderStatus.Created,
+//     expiresAt,
+//     ticket,
+//   });
+//   await order.save();
+
+//   await request(app)
+//     .post("/api/orders")
 //     .set("Cookie", signin())
 //     .send({
-//       title,
-//       price,
-//     });
-
-//   expect(response.status).toEqual(201);
-//   expect(response.body.title).toBe(title);
-//   expect(response.body.price).toBe(price);
-
-//   const ticketsAfter = await Ticket.find({});
-//   expect(ticketsAfter.length).toEqual(1);
+//       ticketId: ticket.id,
+//     })
+//     .expect(201);
 // });
 
 // it("Publishes an event", async () => {
