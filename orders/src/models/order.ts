@@ -10,7 +10,6 @@ interface OrderAttrs {
 }
 
 interface OrderDoc extends Mongoose.Document {
-  orderId: string;
   userId: string;
   status: OrderStatus;
   expiresAt: Date;
@@ -23,10 +22,6 @@ interface OrderModel extends Mongoose.Model<OrderDoc> {
 
 const orderSchema = new Mongoose.Schema(
   {
-    orderId: {
-      type: String,
-      required: true,
-    },
     userId: {
       type: String,
       required: true,
