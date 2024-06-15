@@ -4,6 +4,7 @@ import { app } from "../../app";
 import { Ticket } from "../../models/ticket";
 import { Order } from "../../models/order";
 import { OrderStatus } from "@mroc/ex-ms-common/build/events/types/order-status";
+import { natsWrapper } from "@mroc/ex-ms-common/build";
 
 it("can only be accessed if user is signed in", async () => {
   await request(app).post("/api/orders").send({}).expect(401);
@@ -51,4 +52,20 @@ it("returns error if ticket already reserved", async () => {
     .expect(201);
 });
 
-it.todo("Publishes an event");
+it("Publishes an event", async () => {
+  const ticket = Ticket.build({
+    title: "Title",
+    price: 20,
+  });
+  await ticket.save();
+
+  await request(app)
+    .post("/api/orders")
+    .set("Cookie", signin())
+    .send({
+      ticketId: ticket.id,
+    })
+    .expect(201);
+
+  expect(natsWrapper.client().publish).toHaveBeenCalled();
+});

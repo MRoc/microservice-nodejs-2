@@ -2,10 +2,12 @@ import {
   NotAuthorizedError,
   NotFoundError,
   OrderStatus,
+  natsWrapper,
   requireAuth,
 } from "@mroc/ex-ms-common/build";
 import express, { Request, Response } from "express";
 import { Order } from "../models/order";
+import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
 
 const router = express.Router();
 
@@ -26,7 +28,16 @@ router.delete(
     order.status = OrderStatus.Cancelled;
     await order.save();
 
-    // Needs to publish an event!
+    new OrderCancelledPublisher(natsWrapper.client()).publish({
+      id: order.id,
+      status: order.status,
+      userId: order.userId,
+      expiresAt: order.expiresAt.toISOString(),
+      ticket: {
+        id: order.ticket.id,
+        price: order.ticket.price,
+      },
+    });
 
     return res.status(204).send(order);
   }
