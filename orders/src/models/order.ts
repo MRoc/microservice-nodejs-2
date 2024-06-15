@@ -3,7 +3,7 @@ import { OrderStatus } from "@mroc/ex-ms-common";
 import { TicketDoc } from "./ticket";
 
 interface OrderAttrs {
-  orderId: string;
+  userId: string;
   status: OrderStatus;
   expiresAt: Date;
   ticket: TicketDoc;
@@ -11,6 +11,7 @@ interface OrderAttrs {
 
 interface OrderDoc extends Mongoose.Document {
   orderId: string;
+  userId: string;
   status: OrderStatus;
   expiresAt: Date;
   ticket: TicketDoc;
@@ -23,6 +24,10 @@ interface OrderModel extends Mongoose.Model<OrderDoc> {
 const orderSchema = new Mongoose.Schema(
   {
     orderId: {
+      type: String,
+      required: true,
+    },
+    userId: {
       type: String,
       required: true,
     },
