@@ -7,21 +7,8 @@ import { OrderStatus } from "@mroc/ex-ms-common/build/events/types/order-status"
 // import { Ticket } from "../../models/ticket";
 // import { natsWrapper } from "@mroc/ex-ms-common";
 
-it("has a route handler listening to post requests", async () => {
-  const response = await request(app).post("/api/orders").send({});
-  expect(response.status).not.toEqual(404);
-});
-
 it("can only be accessed if user is signed in", async () => {
   await request(app).post("/api/orders").send({}).expect(401);
-});
-
-it("returns a status other than 401 if user is signed in", async () => {
-  const response = await request(app)
-    .post("/api/orders")
-    .set("Cookie", signin())
-    .send({});
-  expect(response.status).not.toEqual(401);
 });
 
 it("returns error if no ticketId is provided", async () => {
@@ -66,41 +53,4 @@ it("returns error if ticket already reserved", async () => {
     .expect(201);
 });
 
-// it("reserves a ticket", async () => {
-//   const ticket = Ticket.build({
-//     title: "Title",
-//     price: 20,
-//   });
-//   await ticket.save();
-
-//   const expiresAt = new Date();
-//   expiresAt.setSeconds(new Date().getSeconds() + 15 * 60);
-
-//   const order = Order.build({
-//     userId: new mongoose.Types.ObjectId().toHexString(),
-//     status: OrderStatus.Created,
-//     expiresAt,
-//     ticket,
-//   });
-//   await order.save();
-
-//   await request(app)
-//     .post("/api/orders")
-//     .set("Cookie", signin())
-//     .send({
-//       ticketId: ticket.id,
-//     })
-//     .expect(201);
-// });
-
-// it("Publishes an event", async () => {
-//   const title = "Title";
-//   const price = 20;
-
-//   await request(app).post("/api/tickets").set("Cookie", signin()).send({
-//     title,
-//     price,
-//   });
-
-//   expect(natsWrapper.client().publish).toHaveBeenCalled();
-// });
+it.todo("Publishes an event");
