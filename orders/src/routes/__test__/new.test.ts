@@ -4,8 +4,6 @@ import { app } from "../../app";
 import { Ticket } from "../../models/ticket";
 import { Order } from "../../models/order";
 import { OrderStatus } from "@mroc/ex-ms-common/build/events/types/order-status";
-// import { Ticket } from "../../models/ticket";
-// import { natsWrapper } from "@mroc/ex-ms-common";
 
 it("can only be accessed if user is signed in", async () => {
   await request(app).post("/api/orders").send({}).expect(401);
