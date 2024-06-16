@@ -39,12 +39,12 @@ router.put(
 
     await ticket.save();
 
-    // new TicketUpdatedPublisher(natsWrapper.client()).publish({
-    //   id: ticket.id,
-    //   title: ticket.title,
-    //   price: ticket.price,
-    //   userId: ticket.userId,
-    // });
+    new TicketUpdatedPublisher(natsWrapper.client()).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+    });
 
     res.status(200).send(ticket);
   }

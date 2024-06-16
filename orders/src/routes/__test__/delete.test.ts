@@ -20,7 +20,11 @@ it("returns 404 if orderId is invalid", async () => {
 });
 
 it("cancels the order", async () => {
-  const ticket = await Ticket.build({ title: "Title", price: 20 });
+  const ticket = await Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: "Title",
+    price: 20,
+  });
   await ticket.save();
 
   const user = signin();
@@ -42,7 +46,11 @@ it("cancels the order", async () => {
 });
 
 it("emits an order cancelled event", async () => {
-  const ticket = await Ticket.build({ title: "Title", price: 20 });
+  const ticket = await Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: "Title",
+    price: 20,
+  });
   await ticket.save();
 
   const user = signin();

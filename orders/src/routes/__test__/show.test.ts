@@ -18,7 +18,11 @@ it("returns 404 if orderId is invalid", async () => {
 });
 
 it("fetches the order", async () => {
-  const ticket = await Ticket.build({ title: "Title", price: 20 });
+  const ticket = await Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: "Title",
+    price: 20,
+  });
   await ticket.save();
 
   const user = signin();
@@ -39,7 +43,11 @@ it("fetches the order", async () => {
 });
 
 it("returns 401 if other users order", async () => {
-  const ticket = await Ticket.build({ title: "Title", price: 20 });
+  const ticket = await Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: "Title",
+    price: 20,
+  });
   await ticket.save();
 
   const user1 = signin();

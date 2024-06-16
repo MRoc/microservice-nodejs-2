@@ -1,6 +1,7 @@
 import request from "supertest";
 import { app } from "../../app";
 import { Ticket } from "../../models/ticket";
+import mongoose from "mongoose";
 
 it("can only be accessed if user is signed in", async () => {
   await request(app).get("/api/orders").send({}).expect(401);
@@ -8,7 +9,11 @@ it("can only be accessed if user is signed in", async () => {
 
 it("returns orders for current user", async () => {
   const buildTicket = async () => {
-    const ticket = await Ticket.build({ title: "Title", price: 20 });
+    const ticket = await Ticket.build({
+      id: new mongoose.Types.ObjectId().toHexString(),
+      title: "Title",
+      price: 20,
+    });
     ticket.save();
     return ticket;
   };

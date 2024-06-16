@@ -3,6 +3,7 @@ import { Order } from "./order";
 import { OrderStatus } from "@mroc/ex-ms-common/build";
 
 interface TicketAttrs {
+  id: string;
   title: string;
   price: number;
 }
@@ -39,7 +40,12 @@ const ticketSchema = new Mongoose.Schema(
 );
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
-  return new Ticket(attrs);
+  const { id, title, price } = attrs;
+  return new Ticket({
+    _id: id,
+    title,
+    price,
+  });
 };
 
 ticketSchema.methods.isReserved = async function () {
