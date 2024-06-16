@@ -43,3 +43,14 @@ it("acks the message", async () => {
   await listener.onMessage(data, msg);
   expect(msg.ack).toHaveBeenCalled();
 });
+
+it("does not ack if message is in future", async () => {
+  const { listener, data, msg } = await setup();
+  data.version = 10;
+
+  expect(async () => {
+    await listener.onMessage(data, msg);
+  }).rejects.toThrow();
+
+  expect(msg.ack).not.toHaveBeenCalled();
+});
