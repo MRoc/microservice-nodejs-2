@@ -12,8 +12,13 @@ export class TicketUpdatedListener extends BaseListener<TicketUpdatedEvent> {
   readonly subject = Subjects.TicketUpdated;
   readonly queueGroupName = queueGroupName;
   async onMessage(data: TicketUpdatedEvent["data"], msg: Message) {
-    const { id } = data;
-    const ticket = await Ticket.findById(id);
+    const { id, version } = data;
+
+    const ticket = await Ticket.findOne({
+      _id: id,
+      version: version - 1,
+    });
+
     if (!ticket) {
       throw new NotFoundError();
     }
