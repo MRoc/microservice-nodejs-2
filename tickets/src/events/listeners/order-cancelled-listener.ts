@@ -1,14 +1,18 @@
-import { BaseListener, OrderCreatedEvent, Subjects } from "@mroc/ex-ms-common";
+import {
+  BaseListener,
+  OrderCancelledEvent,
+  Subjects,
+} from "@mroc/ex-ms-common";
 import { Message } from "node-nats-streaming";
 import { queueGroupName } from "./queue-group-name";
 import { Ticket } from "../../models/ticket";
 import { TicketUpdatedPublisher } from "../publishers/ticket-updated-publisher";
 
-export class OrderCreatedListener extends BaseListener<OrderCreatedEvent> {
-  readonly subject = Subjects.OrderCreated;
+export class OrderCancelledListener extends BaseListener<OrderCancelledEvent> {
+  readonly subject = Subjects.OrderCancelled;
   readonly queueGroupName = queueGroupName;
   async onMessage(
-    data: OrderCreatedEvent["data"],
+    data: OrderCancelledEvent["data"],
     msg: Message
   ): Promise<void> {
     const ticket = await Ticket.findById(data.ticket.id);
@@ -16,7 +20,7 @@ export class OrderCreatedListener extends BaseListener<OrderCreatedEvent> {
       throw new Error("Ticket not found");
     }
 
-    ticket.set({ orderId: data.id });
+    ticket.set({ orderId: undefined });
     await ticket.save();
 
     await new TicketUpdatedPublisher(this.client).publish({
@@ -25,7 +29,7 @@ export class OrderCreatedListener extends BaseListener<OrderCreatedEvent> {
       title: ticket.title,
       price: ticket.price,
       userId: ticket.userId,
-      orderId: ticket.orderId,
+      orderId: undefined,
     });
 
     msg.ack();
