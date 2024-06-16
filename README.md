@@ -117,6 +117,7 @@ npm install express-async-errors
 
 ```
 npm install mongoose @types/mongoose
+npm install mongoose-update-if-current
 ```
 
 ### Cookie session
