@@ -1,6 +1,6 @@
 import { Queue, Worker } from "bullmq";
-import IORedis from "ioredis";
-
+import { ExpirationCompletePublisher } from "../events/publishers/expiration-complete-publisher";
+import { natsWrapper } from "@mroc/ex-ms-common/build";
 export interface Payload {
   orderId: string;
 }
@@ -19,7 +19,9 @@ const expirationQueue = new Queue<Payload>(queueName, options);
 const worker = new Worker<Payload>(
   queueName,
   async (job) => {
-    console.log(`TODO expiration:complete event for ${job.data.orderId}`);
+    new ExpirationCompletePublisher(natsWrapper.client()).publish({
+      orderId: job.data.orderId,
+    });
   },
   options
 );
