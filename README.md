@@ -120,6 +120,17 @@ npm install mongoose @types/mongoose
 npm install mongoose-update-if-current
 ```
 
+
+### Bull
+
+
+https://github.com/taskforcesh/bullmq?tab=readme-ov-file
+https://docs.bullmq.io/
+
+```
+npm install bullmq
+```
+
 ### Cookie session
 
 https://github.com/expressjs/cookie-session
