@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { app } from "./app";
 import { natsWrapper } from "@mroc/ex-ms-common";
+import { OrderCancelledListener } from "./events/listeners/order-cancelled-listener";
+import { OrderCreatedListener } from "./events/listeners/order-created-listener";
 
 const start = async () => {
   try {
@@ -38,6 +40,9 @@ const start = async () => {
     });
     process.on("SIGINT", () => natsWrapper.client().close());
     process.on("SIGTERM", () => natsWrapper.client().close());
+
+    new OrderCreatedListener(natsWrapper.client()).listen();
+    new OrderCancelledListener(natsWrapper.client()).listen();
 
     console.log(`Connecting to MongoDb '${process.env.MONGO_URI}'...`);
     await mongoose.connect(process.env.MONGO_URI);

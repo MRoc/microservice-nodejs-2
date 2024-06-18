@@ -25,11 +25,11 @@ export class OrderCancelledListener extends BaseListener<OrderCancelledEvent> {
 
     await new TicketUpdatedPublisher(this.client).publish({
       id: ticket.id,
-      version: ticket.version,
-      title: ticket.title,
-      price: ticket.price,
+      orderId: ticket.orderId,
       userId: ticket.userId,
-      orderId: undefined,
+      price: ticket.price,
+      title: ticket.title,
+      version: ticket.version,
     });
 
     msg.ack();
