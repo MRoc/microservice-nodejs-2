@@ -170,3 +170,12 @@ npm install axios @types/axios
 ```
 npm install cors @types/cors
 ```
+
+### Stripe
+
+```
+npm install stripe
+
+kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=<SECRET_KEY>
+kubectl get secrets
+```

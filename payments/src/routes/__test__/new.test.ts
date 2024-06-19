@@ -3,8 +3,8 @@ import request from "supertest";
 import { app } from "../../app";
 import { Order } from "../../models/order";
 import { OrderStatus } from "@mroc/ex-ms-common/build/events/types/order-status";
-import { natsWrapper } from "@mroc/ex-ms-common/build";
-import { TokenExpiredError } from "jsonwebtoken";
+
+jest.mock("../../stripe");
 
 it("returns 404 when order does not exist", async () => {
   await request(app)
@@ -55,6 +55,28 @@ it("returns 400 when already cancelled", async () => {
     .send({
       orderId: order.id,
       token: "token",
+    })
+    .expect(400);
+});
+
+it("returns 201 with valid inputs", async () => {
+  const userId = new mongoose.Types.ObjectId().toHexString();
+
+  const order = Order.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    version: 0,
+    userId,
+    price: 10,
+    status: OrderStatus.Cancelled,
+  });
+  await order.save();
+
+  await request(app)
+    .post("/api/payments")
+    .set("Cookie", signin(userId))
+    .send({
+      orderId: order.id,
+      token: "tok_visa",
     })
     .expect(400);
 });
