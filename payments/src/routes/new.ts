@@ -7,10 +7,12 @@ import {
   NotFoundError,
   NotAuthorizedError,
   OrderStatus,
+  natsWrapper,
 } from "@mroc/ex-ms-common";
 import { Order } from "../models/order";
 import { Payment } from "../models/payment";
 import { stripe } from "../stripe";
+import { PaymentCreatedPublisher } from "../events/publishers/payment-created-publisher";
 
 const router = express.Router();
 
@@ -44,6 +46,12 @@ router.post(
       stripeId: charge.id,
     });
     await payment.save();
+
+    new PaymentCreatedPublisher(natsWrapper.client()).publish({
+      id: payment.id,
+      orderId: order.id,
+      stripeId: charge.id,
+    });
 
     res.status(201).send({ success: true });
   }
