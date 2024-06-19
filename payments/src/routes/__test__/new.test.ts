@@ -3,6 +3,7 @@ import request from "supertest";
 import { app } from "../../app";
 import { Order } from "../../models/order";
 import { OrderStatus } from "@mroc/ex-ms-common/build/events/types/order-status";
+import { stripe } from "../../stripe";
 
 jest.mock("../../stripe");
 
@@ -67,7 +68,7 @@ it("returns 201 with valid inputs", async () => {
     version: 0,
     userId,
     price: 10,
-    status: OrderStatus.Cancelled,
+    status: OrderStatus.AwaitingPayment,
   });
   await order.save();
 
@@ -78,5 +79,10 @@ it("returns 201 with valid inputs", async () => {
       orderId: order.id,
       token: "tok_visa",
     })
-    .expect(400);
+    .expect(201);
+
+  const chargeOptions = (stripe.charges.create as jest.Mock).mock.calls[0][0];
+  expect(chargeOptions.source).toEqual("tok_visa");
+  expect(chargeOptions.amount).toEqual(1000);
+  expect(chargeOptions.currency).toEqual("usd");
 });
