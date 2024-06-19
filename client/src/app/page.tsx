@@ -4,10 +4,11 @@ import Link from 'next/link';
 
 const Page = async () => {
   const client = await buildClient();
-  const { data } = await client.get('/api/tickets');
+  const { data: tickets } = await client.get('/api/tickets');
+  const { data: currentUser } = await client.get('/api/users/currentuser');
   return (
     <div>
-      <Header />
+      <Header currentUser={currentUser} />
       <div>
         <h1>Tickets</h1>
         <table>
@@ -18,7 +19,7 @@ const Page = async () => {
               <th className='m2'>Link</th>
             </tr>
           </thead>
-          {data.map((ticket: { id: string, title: string, price: number }) => {
+          {tickets.map((ticket: { id: string, title: string, price: number }) => {
             return (
               <tr key={ticket.id}>
                 <td>{ticket.title}</td>
