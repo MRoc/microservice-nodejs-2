@@ -4,6 +4,7 @@ import { natsWrapper } from "@mroc/ex-ms-common";
 import { TicketCreatedListener } from "./events/listeners/ticket-created-listener";
 import { TicketUpdatedListener } from "./events/listeners/ticket-updated-listener";
 import { ExpirationCompleteListener } from "./events/listeners/expiration-complete-listener";
+import { PaymentCreatedListener } from "./events/listeners/payment-created-listener";
 
 const start = async () => {
   try {
@@ -45,6 +46,7 @@ const start = async () => {
     new TicketCreatedListener(natsWrapper.client()).listen();
     new TicketUpdatedListener(natsWrapper.client()).listen();
     new ExpirationCompleteListener(natsWrapper.client()).listen();
+    new PaymentCreatedListener(natsWrapper.client()).listen();
 
     console.log(`Connecting to MongoDb '${process.env.MONGO_URI}'...`);
     await mongoose.connect(process.env.MONGO_URI);
