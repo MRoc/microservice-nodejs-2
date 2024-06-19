@@ -9,6 +9,7 @@ import {
   OrderStatus,
 } from "@mroc/ex-ms-common";
 import { Order } from "../models/order";
+import { Payment } from "../models/payment";
 import { stripe } from "../stripe";
 
 const router = express.Router();
@@ -32,11 +33,17 @@ router.post(
       throw new BadRequestError("Order is cancelled");
     }
 
-    await stripe.charges.create({
+    const charge = await stripe.charges.create({
       currency: "usd",
       amount: order.price * 100,
       source: req.body.token,
     });
+
+    const payment = Payment.build({
+      orderId: order.id,
+      stripeId: charge.id,
+    });
+    await payment.save();
 
     res.status(201).send({ success: true });
   }

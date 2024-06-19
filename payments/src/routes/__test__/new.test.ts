@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../../app";
 import { Order } from "../../models/order";
+import { Payment } from "../../models/payment";
 import { OrderStatus } from "@mroc/ex-ms-common/build/events/types/order-status";
 import { stripe } from "../../stripe";
 
@@ -85,4 +86,15 @@ it("returns 201 with valid inputs", async () => {
   expect(chargeOptions.source).toEqual("tok_visa");
   expect(chargeOptions.amount).toEqual(1000);
   expect(chargeOptions.currency).toEqual("usd");
+
+  const stripeId = await ((stripe.charges.create as jest.Mock).mock.results[0]
+    .value as Promise<{
+    id: string;
+  }>);
+
+  const payment = await Payment.findOne({
+    orderId: order.id,
+    stripeId: stripeId.id,
+  });
+  expect(payment).not.toBeNull();
 });
