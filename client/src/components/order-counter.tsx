@@ -5,9 +5,11 @@ import { OrderType } from "@/api/order.types";
 import StripeCheckout from "react-stripe-checkout";
 import { UserType } from "@/api/user.types";
 import useRequest from "@/hooks/use-request";
+import { useRouter } from 'next/navigation'
 
 const OrderCounter = ({ order, user }: { order: OrderType, user: UserType }) => {
   const [timeLeft, setTimeLeft] = useState(0);
+  const router = useRouter()
 
   useEffect(() => {
     const updateTimeLeft = () => {
@@ -30,7 +32,7 @@ const OrderCounter = ({ order, user }: { order: OrderType, user: UserType }) => 
       orderId: order.id
     },
     onSuccess: (payment) => {
-      console.log(payment);
+      router.push('/')
     }
   });
 
@@ -42,7 +44,7 @@ const OrderCounter = ({ order, user }: { order: OrderType, user: UserType }) => 
       <div>
         <span>Time to pay: {`${Math.round(timeLeft / 1000)} sec`}</span>
         <StripeCheckout
-          token={(token) => console.log(token)}
+          token={({ id }) => doRequest({ token: id })}
           stripeKey="pk_test_51PT4EcG6W6aWG8PX0N6By6Bigao6eRSYrWPg1ClmcuWiez4FsQDjalwiluxc7xQNz1CuVLDrcbeMrEtKYb9RQnMW000VCKLTbE"
           amount={order.ticket.price * 100}
           email={user.email} />

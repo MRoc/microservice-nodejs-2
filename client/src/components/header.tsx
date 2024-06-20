@@ -6,9 +6,11 @@ import React from 'react'
 
 const Header = ({ currentUser }: { currentUser: UserType}) => {
   const links = [
+    { label: 'Sell Ticket', href: '/tickets/new', visible: currentUser },
+    { label: 'My Orders', href: '/orders', visible: currentUser },
     { label: 'Sign Up', href: '/auth/signup', visible: !currentUser },
     { label: 'Sign In', href: '/auth/signin', visible: !currentUser },
-    { label: 'Sign Out', href: '/auth/signout', visible: currentUser }
+    { label: 'Sign Out', href: '/auth/signout', visible: currentUser },
   ];
 
   return <div>

@@ -20,15 +20,17 @@ const Page = async () => {
               <th className='m2'>Link</th>
             </tr>
           </thead>
-          {tickets.map((ticket: { id: string, title: string, price: number }) => {
-            return (
-              <tr key={ticket.id}>
-                <td>{ticket.title}</td>
-                <td>{ticket.price}</td>
-                <td><Link href="/tickets/[ticketId]" as={`/tickets/${ticket.id}`}>View</Link></td>
-              </tr>
-            );
-          })}
+          <tbody>
+            {tickets.map((ticket: { id: string, title: string, price: number }) => {
+              return (
+                <tr key={ticket.id}>
+                  <td>{ticket.title}</td>
+                  <td>{ticket.price}</td>
+                  <td><Link href="/tickets/[ticketId]" as={`/tickets/${ticket.id}`}>View</Link></td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
     </div>

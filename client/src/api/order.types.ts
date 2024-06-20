@@ -6,6 +6,7 @@ export interface OrderType {
   expiresAt: string;
   ticket: {
     id: string;
+    title: string;
     price: number;
   };
 }
