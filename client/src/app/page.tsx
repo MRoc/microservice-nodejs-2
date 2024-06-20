@@ -1,11 +1,12 @@
 import buildClient from '@/api/build-client';
 import { Header } from '../components/header';
 import Link from 'next/link';
+import { UserType } from '@/api/user.types';
 
 const Page = async () => {
   const client = await buildClient();
   const { data: tickets } = await client.get('/api/tickets');
-  const { data: currentUser } = await client.get('/api/users/currentuser');
+  const { data: currentUser } = await client.get<UserType>('/api/users/currentuser');
   return (
     <div>
       <Header currentUser={currentUser} />

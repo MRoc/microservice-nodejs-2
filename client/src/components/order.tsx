@@ -1,26 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { OrderType } from "@/api/order.types";
+import { UserType } from "@/api/user.types";
+import { OrderCounter } from "@/components/order-counter";
 
-const Order = ({ order }: { order: OrderType }) => {
-  const [timeLeft, setTimeLeft] = useState('');
-
-  useEffect(() => {
-    const updateTimeLeft = () => {
-      const msLeft = new Date(order.expiresAt).getTime() - new Date().getTime();
-      setTimeLeft(`${Math.round(msLeft / 1000)} sec`)
-    };
-
-    updateTimeLeft();
-    
-    const timerId = setInterval(updateTimeLeft, 1000);
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [order]);
-
-  const msLeft = new Date(order.expiresAt).getTime() - new Date().getTime();
+const Order = ({ order, user }: { order: OrderType, user: UserType }) => {
   return (
     <div>
       <h1>Order</h1>
@@ -28,9 +12,9 @@ const Order = ({ order }: { order: OrderType }) => {
       <div>Order Version: {order.version}</div>
       <div>Order Status: {order.status}</div>
       <div>User ID: {order.userId}</div>
-      <div>Expires in: {timeLeft} sec</div>
       <div>Ticket ID: {order.ticket.id}</div>
       <div>Ticket Price: {order.ticket.price}</div>
+      <OrderCounter order={order} user={user} />
     </div>
     );
 };

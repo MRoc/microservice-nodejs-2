@@ -19,10 +19,10 @@ export default function useRequest({
 }) {
   const [errors, setErrors] = useState<JSX.Element | null>(null);
 
-  const doRequest = async () => {
+  const doRequest = async (props = {}) => {
     try {
       setErrors(null);
-      const response = await axios[method](url, body);
+      const response = await axios[method](url, { ...body, ...props});
 
       if (onSuccess) {
         onSuccess(response.data);

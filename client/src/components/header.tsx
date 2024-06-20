@@ -1,9 +1,10 @@
 "use client";
 
+import { UserType } from '@/api/user.types';
 import Link from 'next/link';
 import React from 'react'
 
-const Header = async ({ currentUser }: { currentUser: { id: string }}) => {
+const Header = ({ currentUser }: { currentUser: UserType}) => {
   const links = [
     { label: 'Sign Up', href: '/auth/signup', visible: !currentUser },
     { label: 'Sign In', href: '/auth/signin', visible: !currentUser },

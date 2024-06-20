@@ -178,4 +178,7 @@ npm install stripe
 
 kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=<SECRET_KEY>
 kubectl get secrets
+
+npm install react-stripe-checkout
+npm install prop-types
 ```

@@ -22,7 +22,7 @@ const Ticket = ({ id, title, price } : { id: string, title: string, price: strin
       <div>{title}</div>
       <div>{price}</div>
       {errors}
-      <div><button onClick={(e) => doRequest()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Purchase</button></div>
+      <div><button onClick={(e) => doRequest({})} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Purchase</button></div>
     </div>
   );
 };
