@@ -11,7 +11,7 @@ const Page = async () => {
     <div>
       <Header currentUser={currentUser} />
       <div>
-        <h1>Tickets</h1>
+        <h1 className="text-xl">Tickets</h1>
         <table>
           <thead>
             <tr>
