@@ -7,6 +7,10 @@
   --background-rgb: 210, 210, 210;
 }
 
+h1 {
+  @apply text-xl;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 210, 210, 210;
