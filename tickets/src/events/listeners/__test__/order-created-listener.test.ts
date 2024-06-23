@@ -23,6 +23,7 @@ const setup = async () => {
     expiresAt: new Date().toISOString(),
     ticket: {
       id: ticket.id,
+      title: ticket.title,
       price: ticket.price,
     },
   };

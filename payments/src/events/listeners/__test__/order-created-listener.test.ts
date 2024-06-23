@@ -16,6 +16,7 @@ const setup = async () => {
     expiresAt: new Date().toISOString(),
     ticket: {
       id: new mongoose.Types.ObjectId().toHexString(),
+      title: "Title",
       price: 10,
     },
   };
