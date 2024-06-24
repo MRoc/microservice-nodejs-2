@@ -1,4 +1,3 @@
-import mongoose, { connect } from "mongoose";
 import { app } from "./app";
 import {
   natsWrapper,
@@ -22,7 +21,6 @@ const start = async () => {
     throwIfMissingMongoConfig();
 
     connectNsts();
-
     new TicketCreatedListener(natsWrapper.client()).listen();
     new TicketUpdatedListener(natsWrapper.client()).listen();
     new ExpirationCompleteListener(natsWrapper.client()).listen();
