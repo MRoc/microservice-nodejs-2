@@ -44,12 +44,13 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Run `doctl kubernetes cluster kubeconfig save <cluster-name>` (microservice-nodejs-cluster)
 - Run `kubectl get nodes` to see if there are any nodes
 
-
 - Create access token in Docker Hub
 - Store token on the project settings "secret" in GitHub as DOCKER_USERNAME and DOCKER_PASSWORD
 
 - Create access token in Digital Ocean
 - Store token on project settings "secret" in GitHub as DIGITALOCEAN_ACCESS_TOKEN
+
+- Create secrets for JWT and Stripe as described under `Secret` section.
 
 
 ## Locally
@@ -89,6 +90,7 @@ The secret is then forwarded as env variable to the pod in the deployment file.
 
 ```
 kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>
+kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=<SECRET_KEY>
 kubectl get secrets
 ```
 
