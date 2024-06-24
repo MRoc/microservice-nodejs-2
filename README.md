@@ -48,6 +48,9 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Create access token in Docker Hub
 - Store token on the project settings "secret" in GitHub as DOCKER_USERNAME and DOCKER_PASSWORD
 
+- Create access token in Digital Ocean
+- Store token on project settings "secret" in GitHub as DIGITALOCEAN_ACCESS_TOKEN
+
 
 ## Locally
 
