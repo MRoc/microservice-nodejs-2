@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: auth
-          # image: mroc/auth
-          image: us.gcr.io/microservice-nodejs-2/auth
+          image: mroc/auth
+          # image: us.gcr.io/microservice-nodejs-2/auth
           env:
             - name: MONGO_URI
               value: 'mongodb://auth-mongo-srv:27017/auth'
