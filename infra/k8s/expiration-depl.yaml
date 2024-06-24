@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: expiration
-          # image: mroc/expiration
-          image: us.gcr.io/microservice-nodejs-2/expiration
+          image: mroc/expiration
+          # image: us.gcr.io/microservice-nodejs-2/expiration
           env:
             - name: NATS_URI
               value: 'http://nats-srv:4222'

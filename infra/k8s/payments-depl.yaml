@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: payments
-          # image: mroc/payments
-          image: us.gcr.io/microservice-nodejs-2/payments
+          image: mroc/payments
+          # image: us.gcr.io/microservice-nodejs-2/payments
           env:
             - name: MONGO_URI
               value: 'mongodb://payments-mongo-srv:27017/payments'

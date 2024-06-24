@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: tickets
-          # image: mroc/tickets
-          image: us.gcr.io/microservice-nodejs-2/tickets
+          image: mroc/tickets
+          # image: us.gcr.io/microservice-nodejs-2/tickets
           env:
             - name: MONGO_URI
               value: 'mongodb://tickets-mongo-srv:27017/tickets'

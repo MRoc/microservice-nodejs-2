@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: client
-          image: us.gcr.io/microservice-nodejs-2/client
+          image: mroc/client
+          # image: us.gcr.io/microservice-nodejs-2/client
           env:
             - name: JWT_KEY
               valueFrom:

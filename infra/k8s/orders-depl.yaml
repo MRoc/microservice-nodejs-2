@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: orders
-          # image: mroc/orders
-          image: us.gcr.io/microservice-nodejs-2/orders
+          image: mroc/orders
+          # image: us.gcr.io/microservice-nodejs-2/orders
           env:
             - name: MONGO_URI
               value: 'mongodb://orders-mongo-srv:27017/orders'
