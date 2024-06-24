@@ -34,6 +34,21 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Get IP address of load balancer
 - Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
 
+
+## Digital Ocean
+
+- Create Kubernetes cluster in Digital Ocean
+- Install `doctl` from https://docs.digitalocean.com/reference/doctl/how-to/install/
+- Create a access token at https://cloud.digitalocean.com/account/api/tokens
+- Run `doctl auth init` and use the new token
+- Run `doctl kubernetes cluster kubeconfig save <cluster-name>` (microservice-nodejs-cluster)
+- Run `kubectl get nodes` to see if there are any nodes
+
+
+- Create access token in Docker Hub
+- Store token on the project settings "secret" in GitHub as DOCKER_USERNAME and DOCKER_PASSWORD
+
+
 ## Locally
 
 - Switch kubernetes context to local
@@ -56,6 +71,13 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - If having problem with self signed certificate while rendering NextJS server side on windows, run `$env:NODE_TLS_REJECT_UNAUTHORIZED=0` first.
 
 ## Kubernetes
+
+### Switch between contexts
+
+```
+kubectl config view
+kubectl config use-context <context-name>
+```
 
 ### Secret
 
