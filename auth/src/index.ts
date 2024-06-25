@@ -17,5 +17,4 @@ const start = async () => {
     console.error(error);
   }
 };
-
 start();

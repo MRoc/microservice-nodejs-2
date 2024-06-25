@@ -5,7 +5,6 @@ import { throwIfMissingNatsConfig, connectNsts } from "@mroc/ex-ms-common";
 const start = async () => {
   try {
     throwIfMissingNatsConfig();
-
     connectNsts();
 
     console.log("Expiration service is starting...");
