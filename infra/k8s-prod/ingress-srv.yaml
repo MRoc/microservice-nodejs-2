@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: microservice-nodejs-2-dev.com
+    - host: seqo.io
       http:
         paths:
           - path: /api/users/?(.*)
