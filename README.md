@@ -8,8 +8,6 @@ npx tsc --init
 
 ```
 skaffold dev
-make docker-build
-make k8s-apply
 ```
 
 ```
@@ -41,7 +39,7 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Install `doctl` from https://docs.digitalocean.com/reference/doctl/how-to/install/
 - Create a access token at https://cloud.digitalocean.com/account/api/tokens
 - Run `doctl auth init` and use the new token
-- Run `doctl kubernetes cluster kubeconfig save <cluster-name>` (microservice-nodejs-cluster)
+- Run `doctl kubernetes cluster kubeconfig save <cluster-name>` (microservice-nodejs-cluster-2)
 - Run `kubectl get nodes` to see if there are any nodes
 
 - Create access token in Docker Hub
@@ -51,6 +49,10 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Store token on project settings "secret" in GitHub as DIGITALOCEAN_ACCESS_TOKEN
 
 - Create secrets for JWT and Stripe as described under `Secret` section.
+
+- Install ingress controller `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/do/deploy.yaml` (https://kubernetes.github.io/ingress-nginx/deploy/)
+- Get IP address of load balancer
+- Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
 
 
 ## Locally
