@@ -3,8 +3,8 @@ kind: Ingress
 metadata:
   name: ingress-srv
   annotations:
-    kuservice.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'false'
-    kuservice.beta.kubernetes.io/do-loadbalancer-hostname: 'microservice-nodejs-2-dev.com'
+    service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'false'
+    service.beta.kubernetes.io/do-loadbalancer-hostname: 'microservice-nodejs-2-dev.com'
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
