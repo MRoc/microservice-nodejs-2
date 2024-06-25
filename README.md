@@ -39,7 +39,7 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Install `doctl` from https://docs.digitalocean.com/reference/doctl/how-to/install/
 - Create a access token at https://cloud.digitalocean.com/account/api/tokens
 - Run `doctl auth init` and use the new token
-- Run `doctl kubernetes cluster kubeconfig save <cluster-name>` (microservice-nodejs-cluster-2)
+- Run `doctl kubernetes cluster kubeconfig save <cluster-name>` (microservice-nodejs-3-cluster)
 - Run `kubectl get nodes` to see if there are any nodes
 
 - Create access token in Docker Hub
@@ -78,12 +78,17 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 
 ## Kubernetes
 
-### Switch between contexts
+### Contexts
 
 ```
 kubectl config view
 kubectl config use-context <context-name>
+
+kubectl config unset contexts.<context-name> 
+kubectl config unset users.<user-name>
+kubectl config unset clusters.<cluster-name>
 ```
+
 
 ### Secret
 
