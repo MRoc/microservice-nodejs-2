@@ -1,18 +1,18 @@
 import buildClient from '@/api/build-client';
 import { Header } from '../components/header';
-// import Link from 'next/link';
+import Link from 'next/link';
 import { UserType } from '@/api/user.types';
 
 const Page = async () => {
   const client = await buildClient();
-  // const { data: tickets } = await client.get('/api/tickets');
+  const { data: tickets } = await client.get('/api/tickets');
   const { data: currentUser } = await client.get<UserType>('/api/users/currentuser');
   return (
     <div>
       <Header currentUser={currentUser} />
       <div>
         <h1 className="text-xl">Ticket Shop</h1>
-        {/* <table>
+        <table>
           <thead>
             <tr>
               <th className='m2'>Title</th>
@@ -31,7 +31,7 @@ const Page = async () => {
               );
             })}
           </tbody>
-        </table> */}
+        </table>
       </div>
     </div>
 );

@@ -5,7 +5,7 @@ const buildClient = async (): Promise<AxiosInstance> => {
     console.log(`Running buildClient on the server!`);
     const { headers } = await import("next/headers");
     return axios.create({
-      baseURL: "http://seqo.io",
+      baseURL: "http://seqo.io/",
       // "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
       headers: {
         Host: headers().get("Host"),
