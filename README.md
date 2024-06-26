@@ -55,6 +55,16 @@ http://microservice-nodejs-2-dev.com/api/users/currentuser
 - Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
 
 
+- ingress-nginx-controller
+- http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
+- https://docs.digitalocean.com/products/kubernetes/how-to/add-load-balancers/
+
+```
+kubectl get pods -n ingress-nginx
+kubectl get svc --namespace=ingress-nginx
+kubectl describe service ingress-nginx-controller -n ingress-nginx
+```
+
 ## Locally
 
 - Switch kubernetes context to local
@@ -108,9 +118,6 @@ kubectl get namespace
 kubectl get services -n <namespace>
 http://service.namespace.svc.cluster.local
 ```
-
-ingress-nginx-controller
-http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
 
 
 ## How to add a service
