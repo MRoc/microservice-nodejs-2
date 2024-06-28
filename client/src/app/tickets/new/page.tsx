@@ -14,7 +14,10 @@ export default function Home() {
     body: {
       title, price
     },
-    onSuccess: (data: any) => router.push('/')
+    onSuccess: (_: any) => {
+      router.push('/');
+      router.refresh();
+    }
   })
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

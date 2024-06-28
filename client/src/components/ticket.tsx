@@ -11,7 +11,10 @@ const Ticket = ({ id, title, price } : { id: string, title: string, price: strin
     body: {
       ticketId: id
     },
-    onSuccess: (order: { id: string}) => router.push(`/orders/${order.id}`)
+    onSuccess: (order: { id: string}) => {
+      router.push(`/orders/${order.id}`)
+      router.refresh();
+    }
   });
 
   return (

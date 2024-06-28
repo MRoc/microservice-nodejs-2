@@ -32,7 +32,8 @@ const OrderCounter = ({ order, user }: { order: OrderType, user: UserType }) => 
       orderId: order.id
     },
     onSuccess: (payment) => {
-      router.push('/orders')
+      router.push('/orders');
+      router.refresh();
     }
   });
 

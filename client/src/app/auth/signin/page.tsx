@@ -14,7 +14,10 @@ export default function Home() {
     body: {
       email, password
     },
-    onSuccess: (data: any) => router.push('/')
+    onSuccess: (_: any) => {
+      router.push('/');
+      router.refresh();
+    }
   })
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

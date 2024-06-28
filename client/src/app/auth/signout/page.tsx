@@ -10,7 +10,10 @@ export default function Home() {
     url:'/api/users/signout',
     method: 'post',
     body: {},
-    onSuccess: (_: any) => router.push('/')
+    onSuccess: (_: any) => {
+      router.push('/');
+      router.refresh();
+    }
   })
 
   useEffect(() => {
