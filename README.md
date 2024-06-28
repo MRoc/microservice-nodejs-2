@@ -4,15 +4,28 @@
 npm init -y
 npm install typescript ts-node-dev express @types/express
 npx tsc --init
-```
-
-```
 skaffold dev
 ```
 
-```
-http://microservice-nodejs-2-dev.com/api/users/currentuser
-```
+## Local
+
+- Switch kubernetes context to local
+- Create secret `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>`
+- Check secret `kubectl get secrets`
+- Edit `C:\Windows\System32\drivers\etc\hosts` to `127.0.0.1 <my_url>`
+- Run `kubectl apply -f ./infra/k8s/ingress-srv.yaml`
+- Run `kubectl apply -f ./infra/k8s/auth-mongo-depl.yaml`
+- Run `make docker-build`
+- Run `docker build -t mroc/auth ./auth/`
+- Run `docker push mroc/auth`
+- Change `image: us.gcr.io/microservice-nodejs-2/auth` to `image: mroc/auth`
+- Run `kubectl apply -f ./infra/k8s/auth-depl.yaml`
+- Once visit `https://<my_url>` and accepd kubectl insecure connection
+
+- `cd ./client`
+- `npm run dev`
+
+- If having problem with self signed certificate while rendering NextJS server side on windows, run `$env:NODE_TLS_REJECT_UNAUTHORIZED=0` first.
 
 ## Google cloud
 
@@ -64,27 +77,6 @@ kubectl get pods -n ingress-nginx
 kubectl get svc --namespace=ingress-nginx
 kubectl describe service ingress-nginx-controller -n ingress-nginx
 ```
-
-## Locally
-
-- Switch kubernetes context to local
-- Create secret `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>`
-- Check secret `kubectl get secrets`
-- Edit `C:\Windows\System32\drivers\etc\hosts` to `127.0.0.1 microservice-nodejs-2-dev.com`
-- Run `kubectl apply -f ./infra/k8s/ingress-srv.yaml`
-- Run `kubectl apply -f ./infra/k8s/auth-mongo-depl.yaml`
-- Run `make docker-build`
-- Run `docker build -t mroc/auth ./auth/`
-- Run `docker push mroc/auth`
-- Change `image: us.gcr.io/microservice-nodejs-2/auth` to `image: mroc/auth`
-- Run `kubectl apply -f ./infra/k8s/auth-depl.yaml`
-- Change `const response = await axios[method](url, body);` to `const response = await axios[method]('https://microservice-nodejs-2-dev.com' + url, body);`
-- Once visit `https://microservice-nodejs-2-dev.com` and accepd insecure connection
-
-- `cd ./client`
-- `npm run dev`
-
-- If having problem with self signed certificate while rendering NextJS server side on windows, run `$env:NODE_TLS_REJECT_UNAUTHORIZED=0` first.
 
 ## Kubernetes
 
