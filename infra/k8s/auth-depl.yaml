@@ -33,6 +33,7 @@ metadata:
   name: auth-clusterip-srv
 spec:
   type: NodePort
+  externalTrafficPolicy: Local
   selector:
     app: auth
   ports:

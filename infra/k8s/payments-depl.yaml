@@ -46,6 +46,7 @@ metadata:
   name: payments-clusterip-srv
 spec:
   type: NodePort
+  externalTrafficPolicy: Local
   selector:
     app: payments
   ports:

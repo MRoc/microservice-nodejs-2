@@ -41,6 +41,7 @@ metadata:
   name: orders-clusterip-srv
 spec:
   type: NodePort
+  externalTrafficPolicy: Local
   selector:
     app: orders
   ports:

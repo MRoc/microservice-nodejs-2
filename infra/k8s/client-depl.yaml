@@ -31,6 +31,7 @@ metadata:
   name: client-clusterip-srv
 spec:
   type: NodePort
+  externalTrafficPolicy: Local
   selector:
     app: client
   ports:

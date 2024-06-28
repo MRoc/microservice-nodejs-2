@@ -41,6 +41,7 @@ metadata:
   name: tickets-clusterip-srv
 spec:
   type: NodePort
+  externalTrafficPolicy: Local
   selector:
     app: tickets
   ports:
