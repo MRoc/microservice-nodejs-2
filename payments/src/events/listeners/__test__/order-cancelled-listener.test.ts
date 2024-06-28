@@ -38,7 +38,7 @@ const setup = async () => {
 };
 
 it("updates status of order", async () => {
-  const { listener, data, msg, order } = await setup();
+  const { listener, data, msg } = await setup();
 
   await listener.onMessage(data, msg);
 

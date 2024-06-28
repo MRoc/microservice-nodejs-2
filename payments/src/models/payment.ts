@@ -36,6 +36,9 @@ const paymentSchema = new Mongoose.Schema(
   }
 );
 
+paymentSchema.set("versionKey", "version");
+paymentSchema.plugin(updateIfCurrentPlugin);
+
 paymentSchema.statics.build = (attrs: PaymentAttrs) => {
   return new Payment(attrs);
 };

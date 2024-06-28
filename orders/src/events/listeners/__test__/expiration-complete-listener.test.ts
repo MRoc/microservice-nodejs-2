@@ -39,7 +39,7 @@ const setup = async () => {
 };
 
 it("updates order status to cancelled and calls ack and emits event", async () => {
-  const { listener, order, ticket, data, msg } = await setup();
+  const { listener, order, data, msg } = await setup();
 
   await listener.onMessage(data, msg);
 

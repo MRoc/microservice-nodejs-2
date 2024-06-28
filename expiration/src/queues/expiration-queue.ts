@@ -26,4 +26,4 @@ const worker = new Worker<Payload>(
   options
 );
 
-export { expirationQueue };
+export { expirationQueue, worker };

@@ -36,7 +36,10 @@ const OrderCounter = ({ order, user }: { order: OrderType, user: UserType }) => 
     }
   });
 
-  if (timeLeft <= 0) {
+  if (order.status === "complete") {
+    return <div>{`Order purchased`}</div>;
+  }
+  else if (timeLeft <= 0) {
     return <div>{`Order expired`}</div>;
   }
   else {

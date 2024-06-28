@@ -1,3 +1,11 @@
+tsc-check:
+	tsc --noEmit -p ./auth
+	tsc --noEmit -p ./client
+	tsc --noEmit -p ./common
+	tsc --noEmit -p ./expiration
+	tsc --noEmit -p ./orders
+	tsc --noEmit -p ./payments
+	tsc --noEmit -p ./tickets
 docker-build:
 	docker build -t mroc/auth ./auth/
 	docker push mroc/auth
