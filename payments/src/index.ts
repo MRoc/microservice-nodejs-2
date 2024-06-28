@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { app } from "./app";
 import {
   natsWrapper,
@@ -18,12 +17,12 @@ const start = async () => {
     throwIfMissingNatsConfig();
     throwIfMissingMongoConfig();
 
-    connectNsts();
+    await connectNsts();
 
     new OrderCreatedListener(natsWrapper.client()).listen();
     new OrderCancelledListener(natsWrapper.client()).listen();
 
-    connectMongo();
+    await connectMongo();
 
     app.listen(3000, () => {
       console.log("Payments service is listening on port 3000");

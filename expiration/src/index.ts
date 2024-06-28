@@ -5,7 +5,7 @@ import { throwIfMissingNatsConfig, connectNsts } from "@mroc/ex-ms-common";
 const start = async () => {
   try {
     throwIfMissingNatsConfig();
-    connectNsts();
+    await connectNsts();
 
     console.log("Expiration service is starting...");
     new OrderCreatedListener(natsWrapper.client()).listen();

@@ -8,7 +8,7 @@ const start = async () => {
     }
 
     throwIfMissingMongoConfig();
-    connectMongo();
+    await connectMongo();
 
     app.listen(3000, () => {
       console.log("Auth service is listening on port 3000");

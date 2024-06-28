@@ -19,13 +19,13 @@ const start = async () => {
     throwIfMissingNatsConfig();
     throwIfMissingMongoConfig();
 
-    connectNsts();
+    await connectNsts();
     new TicketCreatedListener(natsWrapper.client()).listen();
     new TicketUpdatedListener(natsWrapper.client()).listen();
     new ExpirationCompleteListener(natsWrapper.client()).listen();
     new PaymentCreatedListener(natsWrapper.client()).listen();
 
-    connectMongo();
+    await connectMongo();
 
     app.listen(3000, () => {
       console.log("Orders service is listening on port 3000");
