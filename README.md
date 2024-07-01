@@ -7,6 +7,8 @@ npx tsc --init
 skaffold dev
 ```
 
+In case of https errors in browser, remind `thisisunsafe`
+
 ## Local
 
 - Switch kubernetes context to local

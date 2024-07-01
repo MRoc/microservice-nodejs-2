@@ -6,6 +6,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
+  ingressClassName: nginx
   rules:
     - host: seqo.io
       http:
@@ -51,7 +52,7 @@ kind: Service
 metadata:
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
-    service.beta.kubernetes.io/do-loadbalancer-hostname: "seqo.io"
+    service.beta.kubernetes.io/do-loadbalancer-hostname: "seqo.seqo.io"
   labels:
     helm.sh/chart: ingress-nginx-4.0.6
     app.kubernetes.io/name: ingress-nginx
