@@ -4,7 +4,7 @@ import { UserType } from '@/api/user.types';
 import Link from 'next/link';
 import React from 'react'
 
-const Header = ({ currentUser }: { currentUser: UserType}) => {
+const Header = ({ currentUser }: { currentUser: UserType | null}) => {
   const links = [
     { label: 'Sell Ticket', href: '/tickets/new', visible: currentUser },
     { label: 'My Orders', href: '/orders', visible: currentUser },

@@ -6,10 +6,10 @@ import { UserType } from '@/api/user.types';
 const Page = async () => {
   const client = await buildClient();
   const { data: tickets } = await client.get('/api/tickets');
-  const { data: currentUser } = await client.get<UserType>('/api/users/currentuser');
+  const { data: user } = await client.get<{ currentUser: UserType | null }>('/api/users/currentuser');
   return (
     <div>
-      <Header currentUser={currentUser} />
+      <Header currentUser={user.currentUser} />
       <div>
         <h1 className="text-xl">Ticket Shop</h1>
         <table>
