@@ -1,23 +1,23 @@
-name: deploy-client
+name: deploy-expiration
 on:
   push:
     branches:
       - main
     paths:
-      - 'client/**'
+      - 'expiration/**'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: cd client && docker build -t mroc/client . 
+      - run: cd expiration && docker build -t mroc/expiration . 
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker push mroc/client
+      - run: docker push mroc/expiration
       - uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - run: doctl kubernetes cluster kubeconfig save microservice-nodejs-3-cluster
-      - run: kubectl rollout restart deployment client-depl
+      - run: doctl kubernetes cluster kubeconfig save microservice-nodejs-9-cluster
+      - run: kubectl rollout restart deployment expiration-depl

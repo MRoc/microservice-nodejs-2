@@ -54,7 +54,7 @@ In case of https errors in browser, remind `thisisunsafe`
 - Install `doctl` from https://docs.digitalocean.com/reference/doctl/how-to/install/
 - Create a access token at https://cloud.digitalocean.com/account/api/tokens
 - Run `doctl auth init` and use the new token
-- Run `doctl kubernetes cluster kubeconfig save <cluster-name>` (microservice-nodejs-3-cluster)
+- Run `doctl kubernetes cluster kubeconfig save <cluster-name>` (microservice-nodejs-9-cluster)
 - Run `kubectl get nodes` to see if there are any nodes
 
 - Create access token in Docker Hub
