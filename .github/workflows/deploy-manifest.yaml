@@ -15,4 +15,4 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - run: doctl kubernetes cluster kubeconfig save microservice-nodejs-9-cluster
-      - run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod
+      - run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod/ingress-srv.yaml && kubectl apply -f infra/k8s-prod/ingress-lb.yaml
