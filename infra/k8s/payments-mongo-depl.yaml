@@ -19,6 +19,10 @@ spec:
             requests:
               memory: "150Mi"
               cpu: 0.05
+      volumes:
+      - name: db-volume
+        persistentVolumeClaim:
+          claimName: payments-mongo-pv-claim
 ---
 apiVersion: v1
 kind: Service

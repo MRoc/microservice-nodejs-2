@@ -69,17 +69,6 @@ In case of https errors in browser, remind `thisisunsafe`
 - Get IP address of load balancer
 - Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
 
-
-- ingress-nginx-controller
-- http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
-- https://docs.digitalocean.com/products/kubernetes/how-to/add-load-balancers/
-
-```
-kubectl get pods -n ingress-nginx
-kubectl get svc --namespace=ingress-nginx
-kubectl describe service ingress-nginx-controller -n ingress-nginx
-```
-
 ## Kubernetes
 
 ### Contexts

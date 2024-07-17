@@ -19,6 +19,13 @@ spec:
             requests:
               memory: "150Mi"
               cpu: 0.05
+          volumeMounts:
+          - mountPath: "/data/db"
+            name: db-volume
+      volumes:
+      - name: db-volume
+        persistentVolumeClaim:
+          claimName: auth-mongo-pv-claim
 ---
 apiVersion: v1
 kind: Service
