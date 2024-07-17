@@ -19,6 +19,13 @@ spec:
             requests:
               memory: "150Mi"
               cpu: 0.05
+          volumeMounts:
+          - mountPath: "/data"
+            name: redis-volume
+      volumes:
+      - name: redis-volume
+        persistentVolumeClaim:
+          claimName: expiration-redis-pv-claim
 ---
 apiVersion: v1
 kind: Service
