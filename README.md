@@ -1,15 +1,14 @@
-# microservice-nodejs-2
+# Pet-microservice-cluster
 
-```
-npm init -y
-npm install typescript ts-node-dev express @types/express
-npx tsc --init
-skaffold dev
-```
+Others have pets, I have a kubernetes cluster. This project is a pet-project microservice kubernetes cluster. Welcome to my journey of becoming a cloud native. It is based on Stephen Grinder "Microservices with Node JS and React" course on Udemy. It progresses so far by:
 
-In case of https errors in browser, remind `thisisunsafe`
+* Volumes are now persistent
 
-## Local
+## Deployment
+
+In case of https errors in browser, remind `thisisunsafe` ;)
+
+### Local
 
 - Switch kubernetes context to local
 - Create secret `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>`
@@ -23,13 +22,11 @@ In case of https errors in browser, remind `thisisunsafe`
 - Change `image: us.gcr.io/microservice-nodejs-2/auth` to `image: mroc/auth`
 - Run `kubectl apply -f ./infra/k8s/auth-depl.yaml`
 - Once visit `https://<my_url>` and accepd kubectl insecure connection
-
 - `cd ./client`
 - `npm run dev`
-
 - If having problem with self signed certificate while rendering NextJS server side on windows, run `$env:NODE_TLS_REJECT_UNAUTHORIZED=0` first.
 
-## Google cloud
+### Google cloud
 
 - Visit https://console.cloud.google.com/welcome?hl=en&project=microservice-nodejs-2
 - Enable Kubernetes Engine API
@@ -47,8 +44,7 @@ In case of https errors in browser, remind `thisisunsafe`
 - Get IP address of load balancer
 - Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
 
-
-## Digital Ocean
+### Digital Ocean
 
 - Create Kubernetes cluster in Digital Ocean
 - Install `doctl` from https://docs.digitalocean.com/reference/doctl/how-to/install/
@@ -56,15 +52,11 @@ In case of https errors in browser, remind `thisisunsafe`
 - Run `doctl auth init` and use the new token
 - Run `doctl kubernetes cluster kubeconfig save <cluster-name>` (microservice-nodejs-9-cluster)
 - Run `kubectl get nodes` to see if there are any nodes
-
 - Create access token in Docker Hub
 - Store token on the project settings "secret" in GitHub as DOCKER_USERNAME and DOCKER_PASSWORD
-
 - Create access token in Digital Ocean
 - Store token on project settings "secret" in GitHub as DIGITALOCEAN_ACCESS_TOKEN
-
 - Create secrets for JWT and Stripe as described under `Secret` section.
-
 - Install ingress controller `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/do/deploy.yaml` (https://kubernetes.github.io/ingress-nginx/deploy/)
 - Get IP address of load balancer
 - Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
@@ -81,7 +73,6 @@ kubectl config unset contexts.<context-name>
 kubectl config unset users.<user-name>
 kubectl config unset clusters.<cluster-name>
 ```
-
 
 ### Secret
 
@@ -102,8 +93,16 @@ kubectl get services -n <namespace>
 http://service.namespace.svc.cluster.local
 ```
 
-
 ## How to add a service
+
+To create a new microservice, the following commands are used:
+
+```bash
+npm init -y
+npm install typescript ts-node-dev express @types/express
+npx tsc --init
+skaffold dev
+```
 
 - Create a new folder in the root directory
 - Add package.json and install dependencies
@@ -113,7 +112,6 @@ http://service.namespace.svc.cluster.local
 - Update k8s deployment file
 - Update skaffold file
 - Write k8s file for services (mongodb, service, ...)
-
 
 ## NPM
 
@@ -144,14 +142,12 @@ npm install mongoose @types/mongoose
 npm install mongoose-update-if-current
 ```
 
-
 ### Bull
-
 
 https://github.com/taskforcesh/bullmq?tab=readme-ov-file
 https://docs.bullmq.io/
 
-```
+```bash
 npm install bullmq
 ```
 
@@ -159,7 +155,7 @@ npm install bullmq
 
 https://github.com/expressjs/cookie-session
 
-```
+```bash
 npm install cookie-session @types/cookie-session
 ```
 
@@ -167,7 +163,7 @@ npm install cookie-session @types/cookie-session
 
 https://github.com/auth0/node-jsonwebtoken
 
-```
+```bash
 npm install jsonwebtoken @types/jsonwebtoken
 ```
 
@@ -175,7 +171,7 @@ npm install jsonwebtoken @types/jsonwebtoken
 
 Allows to test a express server and routes.
 
-```
+```bash
 npm install --save-dev jest @types/jest supertest @types/supertest ts-jest mongodb-memory-server
 ```
 
@@ -183,21 +179,20 @@ npm install --save-dev jest @types/jest supertest @types/supertest ts-jest mongo
 
 Install Next.js:
 
-```
+```bash
 npx create-next-app@latest
 npm install axios @types/axios
 ```
 
-
 ### Cors
 
-```
+```bash
 npm install cors @types/cors
 ```
 
 ### Stripe
 
-```
+```bash
 npm install stripe
 
 kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=<SECRET_KEY>
