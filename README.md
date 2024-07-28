@@ -6,25 +6,25 @@ Others have pets, I have a kubernetes cluster. This project is a pet-project mic
 
 ## Deployment
 
-In case of https errors in browser, remind `thisisunsafe` ;)
+### Local Windows
 
-### Local
-
-- Switch kubernetes context to local
+- Switch kubernetes `kubectl config use-context docker-desktop`
 - Create secret `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>`
-- Check secret `kubectl get secrets`
+- Create secret `kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=<SECRET_KEY>>`
 - Edit `C:\Windows\System32\drivers\etc\hosts` to `127.0.0.1 <my_url>`
-- Run `kubectl apply -f ./infra/k8s/ingress-srv.yaml`
-- Run `kubectl apply -f ./infra/k8s/auth-mongo-depl.yaml`
-- Run `make docker-build`
-- Run `docker build -t mroc/auth ./auth/`
-- Run `docker push mroc/auth`
-- Change `image: us.gcr.io/microservice-nodejs-2/auth` to `image: mroc/auth`
-- Run `kubectl apply -f ./infra/k8s/auth-depl.yaml`
-- Once visit `https://<my_url>` and accepd kubectl insecure connection
-- `cd ./client`
-- `npm run dev`
-- If having problem with self signed certificate while rendering NextJS server side on windows, run `$env:NODE_TLS_REJECT_UNAUTHORIZED=0` first.
+- Deploy ingress nginx `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.1/deploy/static/provider/cloud/deploy.yaml` (https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
+- Change `image: us.gcr.io/microservice-nodejs-2/xyz` to `image: mroc/xyz` in all YAMLs.
+- Change `http://<my_url>/` to ``http://ingress-nginx-controller.ingress-nginx.svc.cluster.local` in `build-client.ts`.
+- Run `docker build -t mroc/client ./client/`
+- Run `docker push mroc/client`
+- Run `kubectl apply -f ./infra/k8s-dev/`
+- Run `kubectl apply -f ./infra/k8s/`
+- Once visit `https://<my_url>` and accept kubectl insecure connection
+
+
+Notes:
+  - In case of https errors in browser, remind `thisisunsafe` ;)
+  - If having problem with self signed certificate while rendering NextJS server side on windows, run `$env:NODE_TLS_REJECT_UNAUTHORIZED=0` first.
 
 ### Google cloud
 

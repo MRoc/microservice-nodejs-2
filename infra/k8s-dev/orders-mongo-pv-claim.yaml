@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: orders-mongo-pv-claim
+spec:
+  storageClassName: local-storage
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      pvName: "orders-mongo-pv"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: orders-mongo-pv
+  labels:
+    pvName: "orders-mongo-pv"
+spec:
+  storageClassName: local-storage
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  hostPath:
+    path: /tmp/data/orders-mongo-pv
