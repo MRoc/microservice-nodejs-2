@@ -1,8 +1,12 @@
 # Pet-microservice-cluster
 
-Others have pets, I have a kubernetes cluster. This project is a pet-project microservice kubernetes cluster. Welcome to my journey of becoming a cloud native. It is based on Stephen Grinder "Microservices with Node JS and React" course on Udemy. It progresses so far by:
+Others have pets, I have a kubernetes cluster. This project is a pet-project microservice kubernetes cluster. It's a bit messy and hairy. Welcome to my journey of becoming a cloud native. It is based on Stephen Grinder "Microservices with Node JS and React" course on Udemy. It progresses so far by:
 
-* Volumes are now persistent
+- [X] Volumes are now persistent.
+- [X] Use of Kustomize to deploy to `dev` or `production`.
+- [ ] Configure all URLs using properties.
+- [ ] Streamline creation of PersistentVolumes between dev and prod.
+- [ ] Consider fixing CI/CD when wanting to pay for prod.
 
 ## Deployment
 
@@ -13,34 +17,15 @@ Others have pets, I have a kubernetes cluster. This project is a pet-project mic
 - Create secret `kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=<SECRET_KEY>>`
 - Edit `C:\Windows\System32\drivers\etc\hosts` to `127.0.0.1 <my_url>`
 - Deploy ingress nginx `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.1/deploy/static/provider/cloud/deploy.yaml` (https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
-- Change `image: us.gcr.io/microservice-nodejs-2/xyz` to `image: mroc/xyz` in all YAMLs.
-- Run `kubectl apply -k ./infra/k8s/`
+- Run `kubectl apply -k ./infra/overlays/dev`
 - Once visit `https://<my_url>` and accept kubectl insecure connection
-
-- The PVs are located in `/mnt/wsl/data`
 
 
 Notes:
   - In case of https errors in browser, remind `thisisunsafe` ;)
   - If having problem with self signed certificate while rendering NextJS server side on windows, run `$env:NODE_TLS_REJECT_UNAUTHORIZED=0` first.
+  - The PVs are located in `/mnt/wsl/data`
 
-### Google cloud
-
-- Visit https://console.cloud.google.com/welcome?hl=en&project=microservice-nodejs-2
-- Enable Kubernetes Engine API
-- Create a cluster
-- Install Google Cloud SDK https://cloud.google.com/sdk/docs/install
-- Run `gcloud` from terminal
-- Run `gcloud init`
-- Run `gcloud components install gke-gcloud-auth-plugin`
-- Run `gcloud container clusters get-credentials autopilot-microservice-nodejs-2 --location europe-west3`
-- Run `kubectl config current-context`
-- Visit https://console.cloud.google.com/marketplace/product/google/cloudbuild.googleapis.com?q=search&referrer=search&hl=en&project=microservice-nodejs-2
-- Enable Cloud Build
-- Run `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/cloud/deploy.yaml` (https://kubernetes.github.io/ingress-nginx/deploy/)
-- Visit https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers?referrer=search&hl=en&project=microservice-nodejs-2
-- Get IP address of load balancer
-- Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
 
 ### Digital Ocean
 
@@ -54,8 +39,29 @@ Notes:
 - Store token on the project settings "secret" in GitHub as DOCKER_USERNAME and DOCKER_PASSWORD
 - Create access token in Digital Ocean
 - Store token on project settings "secret" in GitHub as DIGITALOCEAN_ACCESS_TOKEN
-- Create secrets for JWT and Stripe as described under `Secret` section.
+- Create secret `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>`
+- Create secret `kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=<SECRET_KEY>>`
 - Install ingress controller `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/do/deploy.yaml` (https://kubernetes.github.io/ingress-nginx/deploy/)
+- Run `kubectl apply -k ./infra/overlays/prod`
+- Get IP address of load balancer
+- Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
+
+### Google cloud
+
+- Visit https://console.cloud.google.com/welcome?hl=en&project=microservice-nodejs-2
+- Enable Kubernetes Engine API
+- Create a cluster
+- Install Google Cloud SDK https://cloud.google.com/sdk/docs/install
+- Run `gcloud` from terminal
+- Run `gcloud init`
+- Run `gcloud components install gke-gcloud-auth-plugin`
+- Run `gcloud container clusters get-credentials autopilot-microservice-nodejs-2 --location europe-west3`
+- Change `image: mroc/xyz` to `image: us.gcr.io/microservice-nodejs-2/xyz` in all YAMLs.
+- Run `kubectl config current-context`
+- Visit https://console.cloud.google.com/marketplace/product/google/cloudbuild.googleapis.com?q=search&referrer=search&hl=en&project=microservice-nodejs-2
+- Enable Cloud Build
+- Run `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/cloud/deploy.yaml` (https://kubernetes.github.io/ingress-nginx/deploy/)
+- Visit https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers?referrer=search&hl=en&project=microservice-nodejs-2
 - Get IP address of load balancer
 - Add IP with domain to `C:\Windows\System32\drivers\etc\hosts`
 
