@@ -24,6 +24,8 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
+            - name: CLUSTER_BASE_URL
+              value: "http://seqo.io/"
           resources:
             requests:
               memory: "150Mi"
