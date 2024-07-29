@@ -26,4 +26,4 @@ spec:
   capacity:
     storage: 1Gi
   hostPath:
-    path: /tmp/data/orders-mongo-pv
+    path: /run/desktop/mnt/host/wsl/data/orders-mongo-pv

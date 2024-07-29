@@ -14,12 +14,10 @@ Others have pets, I have a kubernetes cluster. This project is a pet-project mic
 - Edit `C:\Windows\System32\drivers\etc\hosts` to `127.0.0.1 <my_url>`
 - Deploy ingress nginx `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.1/deploy/static/provider/cloud/deploy.yaml` (https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
 - Change `image: us.gcr.io/microservice-nodejs-2/xyz` to `image: mroc/xyz` in all YAMLs.
-- Change `http://<my_url>/` to ``http://ingress-nginx-controller.ingress-nginx.svc.cluster.local` in `build-client.ts`.
-- Run `docker build -t mroc/client ./client/`
-- Run `docker push mroc/client`
-- Run `kubectl apply -f ./infra/k8s-dev/`
-- Run `kubectl apply -f ./infra/k8s/`
+- Run `kubectl apply -k ./infra/k8s/`
 - Once visit `https://<my_url>` and accept kubectl insecure connection
+
+- The PVs are located in `/mnt/wsl/data`
 
 
 Notes:

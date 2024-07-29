@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-mongo
+  template:
+    metadata:
+      labels:
+        app: orders-mongo
+    spec:
+      containers:
+        - name: orders-mongo
+          image: mongo
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: 0.05
+          volumeMounts:
+          - mountPath: "/data/db"
+            name: db-volume
+      volumes:
+      - name: db-volume
+        persistentVolumeClaim:
+          claimName: orders-mongo-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-mongo-srv
+spec:
+  selector:
+    app: orders-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

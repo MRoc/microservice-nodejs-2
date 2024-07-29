@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: tickets-mongo-pv-claim
+  name: auth-mongo-pv-claim
 spec:
   storageClassName: local-storage
   accessModes:
@@ -11,14 +11,14 @@ spec:
       storage: 1Gi
   selector:
     matchLabels:
-      pvName: "tickets-mongo-pv"
+      pvName: "auth-mongo-pv"
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: tickets-mongo-pv
+  name: auth-mongo-pv
   labels:
-    pvName: "tickets-mongo-pv"
+    pvName: "auth-mongo-pv"
 spec:
   storageClassName: local-storage
   accessModes:
@@ -26,4 +26,4 @@ spec:
   capacity:
     storage: 1Gi
   hostPath:
-    path: /tmp/data/tickets-mongo-pv
+    path: /run/desktop/mnt/host/wsl/data/auth-mongo-pv

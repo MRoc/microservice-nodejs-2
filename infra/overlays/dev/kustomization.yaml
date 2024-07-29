@@ -1,0 +1,13 @@
+resources:
+- ../../base
+- ./auth-mongo-pv-claim.yaml
+- ./expiration-redis-pv-claim.yaml
+- ./ingress-srv.yaml
+- ./orders-mongo-pv-claim.yaml
+- ./payments-mongo-pv-claim.yaml
+- ./tickets-mongo-pv-claim.yaml
+
+configMapGenerator:
+- name: application-config
+  envs:
+  - application.properties

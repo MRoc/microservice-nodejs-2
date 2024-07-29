@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: expiration-redis-pv-claim
+  name: payments-mongo-pv-claim
 spec:
   storageClassName: local-storage
   accessModes:
@@ -11,14 +11,14 @@ spec:
       storage: 1Gi
   selector:
     matchLabels:
-      pvName: "expiration-redis-pv"
+      pvName: "payments-mongo-pv"
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: expiration-redis-pv
+  name: payments-mongo-pv
   labels:
-    pvName: "expiration-redis-pv"
+    pvName: "payments-mongo-pv"
 spec:
   storageClassName: local-storage
   accessModes:
@@ -26,4 +26,4 @@ spec:
   capacity:
     storage: 1Gi
   hostPath:
-    path: /tmp/data/expiration-redis-pv
+    path: /run/desktop/mnt/host/wsl/data/payments-mongo-pv
