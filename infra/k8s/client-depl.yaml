@@ -25,7 +25,7 @@ spec:
                   name: jwt-secret
                   key: JWT_KEY
             - name: CLUSTER_BASE_URL
-              value: "http://seqo.io/"
+              value: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local"
           resources:
             requests:
               memory: "150Mi"

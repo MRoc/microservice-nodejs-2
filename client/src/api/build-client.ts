@@ -2,12 +2,14 @@ import axios, { AxiosInstance } from "axios";
 
 const buildClient = async (): Promise<AxiosInstance> => {
   if (typeof window === "undefined") {
-    console.log(`Running buildClient on the server!`);
     const { headers } = await import("next/headers");
 
     if (!process.env.CLUSTER_BASE_URL) {
       throw new Error("CLUSTER_BASE_URL is not defined!");
     }
+
+    console.log(`Running buildClient on the server with base URL: '${process.env.CLUSTER_BASE_URL}'!`);
+
     
     return axios.create({
       baseURL: process.env.CLUSTER_BASE_URL,
