@@ -13,18 +13,16 @@ configMapGenerator:
   - application.properties
 
 patches:
-  - target:
-      kind: Ingress
-      name: ingress-srv
-    patch: |-
-      - op: replace
-        path: /spec/rules/0/host
-        value: seqo.io
-
-patches:
-  - target:
-      kind: PersistentVolumeClaim
-    patch: |-
-      - op: replace
-        path: /spec/storageClassName
-        value: do-block-storage
+- target:
+    kind: Ingress
+    name: ingress-srv
+  patch: |-
+    - op: replace
+      path: /spec/rules/0/host
+      value: seqo.io
+- target:
+    kind: PersistentVolumeClaim
+  patch: |-
+    - op: replace
+      path: /spec/storageClassName
+      value: do-block-storage

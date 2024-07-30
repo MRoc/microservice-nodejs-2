@@ -6,24 +6,22 @@ resources:
 - ./payments-mongo-pv.yaml
 - ./tickets-mongo-pv.yaml
 
-patches:
-  - target:
-      kind: Ingress
-      name: ingress-srv
-    patch: |-
-      - op: replace
-        path: /spec/rules/0/host
-        value: local.seqo.io
-
 configMapGenerator:
 - name: application-config
   envs:
   - application.properties
 
 patches:
-  - target:
-      kind: PersistentVolumeClaim
-    patch: |-
-      - op: replace
-        path: /spec/storageClassName
-        value: local-storage
+- target:
+    kind: Ingress
+    name: ingress-srv
+  patch: |-
+    - op: replace
+      path: /spec/rules/0/host
+      value: local.seqo.io
+- target:
+    kind: PersistentVolumeClaim
+  patch: |-
+    - op: replace
+      path: /spec/storageClassName
+      value: local-storage
