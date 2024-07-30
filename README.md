@@ -3,12 +3,13 @@
 Others have pets, I have a kubernetes cluster. This project is a pet-project microservice kubernetes cluster. It's a bit messy and hairy. Welcome to my journey of becoming a cloud native. It is based on Stephen Grinder "Microservices with Node JS and React" course on Udemy. It progresses so far by:
 
 - [X] Volumes are now persistent.
-- [X] Use of Kustomize to deploy to `dev` or `production`.
-- [X] Configure all URLs using ~~properties~~ kustomize.
+- [X] Kustomize
+  - [X] Use of Kustomize to deploy to `dev` or `production`.
+  - [X] Configure all URLs using ~~properties~~ kustomize.
+  - [X] Streamline creation of PersistentVolumes between dev and prod.
 - [ ] Add prometheus
   - [ ] Base package
   - [ ] Service monitor for applications
-- [ ] Streamline creation of PersistentVolumes between dev and prod.
 - [ ] Consider fixing CI/CD when wanting to pay for prod.
 
 ## Deployment
