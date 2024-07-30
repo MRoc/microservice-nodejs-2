@@ -4,15 +4,18 @@ Others have pets, I have a kubernetes cluster. This project is a pet-project mic
 
 - [X] Volumes are now persistent.
 - [X] Use of Kustomize to deploy to `dev` or `production`.
-- [ ] Configure all URLs using properties.
+- [ ] Add prometheus
+  - [ ] Base package
+  - [ ] Service monitor for applications
 - [ ] Streamline creation of PersistentVolumes between dev and prod.
+- [ ] Configure all URLs using properties.
 - [ ] Consider fixing CI/CD when wanting to pay for prod.
 
 ## Deployment
 
 ### Local Windows
 
-- Switch kubernetes `kubectl config use-context docker-desktop`
+- Switch context `kubectl config use-context docker-desktop`
 - Create secret `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>`
 - Create secret `kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=<SECRET_KEY>>`
 - Edit `C:\Windows\System32\drivers\etc\hosts` to `127.0.0.1 <my_url>`

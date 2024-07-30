@@ -3,7 +3,6 @@ resources:
 - ./auth-mongo-pv-claim.yaml
 - ./expiration-redis-pv-claim.yaml
 - ./ingress-lb.yaml
-- ./ingress-srv.yaml
 - ./orders-mongo-pv-claim.yaml
 - ./payments-mongo-pv-claim.yaml
 - ./tickets-mongo-pv-claim.yaml
@@ -12,3 +11,12 @@ configMapGenerator:
 - name: application-config
   envs:
   - application.properties
+
+patches:
+  - target:
+      kind: Ingress
+      name: ingress-srv
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/host
+        value: seqo.io

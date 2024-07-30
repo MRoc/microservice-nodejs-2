@@ -4,6 +4,7 @@ resources:
 - client-depl.yaml
 - expiration-depl.yaml
 - expiration-redis-depl.yaml
+- ingress-srv.yaml
 - nats-depl.yaml
 - orders-depl.yaml
 - orders-mongo-depl.yaml
