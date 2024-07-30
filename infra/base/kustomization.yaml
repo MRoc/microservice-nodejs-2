@@ -1,14 +1,19 @@
 resources:
 - auth-depl.yaml
 - auth-mongo-depl.yaml
+- auth-mongo-pv-claim.yaml
 - client-depl.yaml
 - expiration-depl.yaml
 - expiration-redis-depl.yaml
+- expiration-redis-pv-claim.yaml
 - ingress-srv.yaml
 - nats-depl.yaml
 - orders-depl.yaml
 - orders-mongo-depl.yaml
+- orders-mongo-pv-claim.yaml
 - payments-depl.yaml
 - payments-mongo-depl.yaml
+- payments-mongo-pv-claim.yaml
 - tickets-depl.yaml
 - tickets-mongo-depl.yaml
+- tickets-mongo-pv-claim.yaml

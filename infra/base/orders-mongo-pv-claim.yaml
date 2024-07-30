@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: expiration-redis-pv-claim
+  name: orders-mongo-pv-claim
 spec:
-  storageClassName: do-block-storage
+  storageClassName: local-storage
   accessModes:
   - ReadWriteOnce
   resources:

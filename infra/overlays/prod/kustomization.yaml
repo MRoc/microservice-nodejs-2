@@ -20,3 +20,11 @@ patches:
       - op: replace
         path: /spec/rules/0/host
         value: seqo.io
+
+patches:
+  - target:
+      kind: PersistentVolumeClaim
+    patch: |-
+      - op: replace
+        path: /spec/storageClassName
+        value: do-block-storage

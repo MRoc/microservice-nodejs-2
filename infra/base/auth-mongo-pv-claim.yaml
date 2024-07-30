@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: auth-mongo-pv-claim
 spec:
-  storageClassName: do-block-storage
+  storageClassName: local-storage
   accessModes:
   - ReadWriteOnce
   resources:

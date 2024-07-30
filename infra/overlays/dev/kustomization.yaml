@@ -1,10 +1,10 @@
 resources:
 - ../../base
-- ./auth-mongo-pv-claim.yaml
-- ./expiration-redis-pv-claim.yaml
-- ./orders-mongo-pv-claim.yaml
-- ./payments-mongo-pv-claim.yaml
-- ./tickets-mongo-pv-claim.yaml
+- ./auth-mongo-pv.yaml
+- ./expiration-redis-pv.yaml
+- ./orders-mongo-pv.yaml
+- ./payments-mongo-pv.yaml
+- ./tickets-mongo-pv.yaml
 
 patches:
   - target:
@@ -19,3 +19,11 @@ configMapGenerator:
 - name: application-config
   envs:
   - application.properties
+
+patches:
+  - target:
+      kind: PersistentVolumeClaim
+    patch: |-
+      - op: replace
+        path: /spec/storageClassName
+        value: local-storage
