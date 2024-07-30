@@ -9,18 +9,17 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  selector:
-    matchLabels:
-      pvName: "payments-mongo-pv"
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: payments-mongo-pv
-  labels:
-    pvName: "payments-mongo-pv"
 spec:
   storageClassName: local-storage
+  claimRef:
+    name: payments-mongo-pv-claim
+    namespace: default
+  persistentVolumeReclaimPolicy: Retain
   accessModes:
   - ReadWriteOnce
   capacity:

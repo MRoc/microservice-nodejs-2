@@ -9,18 +9,17 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  selector:
-    matchLabels:
-      pvName: "auth-mongo-pv"
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: auth-mongo-pv
-  labels:
-    pvName: "auth-mongo-pv"
 spec:
   storageClassName: local-storage
+  claimRef:
+    name: auth-mongo-pv-claim
+    namespace: default
+  persistentVolumeReclaimPolicy: Retain
   accessModes:
   - ReadWriteOnce
   capacity:

@@ -9,18 +9,17 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  selector:
-    matchLabels:
-      pvName: "expiration-redis-pv"
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: expiration-redis-pv
-  labels:
-    pvName: "expiration-redis-pv"
 spec:
   storageClassName: local-storage
+  claimRef:
+    name: expiration-redis-pv-claim
+    namespace: default
+  persistentVolumeReclaimPolicy: Retain
   accessModes:
   - ReadWriteOnce
   capacity:

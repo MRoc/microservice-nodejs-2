@@ -4,11 +4,11 @@ Others have pets, I have a kubernetes cluster. This project is a pet-project mic
 
 - [X] Volumes are now persistent.
 - [X] Use of Kustomize to deploy to `dev` or `production`.
+- [X] Configure all URLs using ~~properties~~ kustomize.
 - [ ] Add prometheus
   - [ ] Base package
   - [ ] Service monitor for applications
 - [ ] Streamline creation of PersistentVolumes between dev and prod.
-- [ ] Configure all URLs using properties.
 - [ ] Consider fixing CI/CD when wanting to pay for prod.
 
 ## Deployment

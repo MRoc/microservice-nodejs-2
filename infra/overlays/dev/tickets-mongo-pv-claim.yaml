@@ -9,18 +9,17 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  selector:
-    matchLabels:
-      pvName: "tickets-mongo-pv"
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: tickets-mongo-pv
-  labels:
-    pvName: "tickets-mongo-pv"
 spec:
   storageClassName: local-storage
+  claimRef:
+    name: tickets-mongo-pv-claim
+    namespace: default
+  persistentVolumeReclaimPolicy: Retain
   accessModes:
   - ReadWriteOnce
   capacity:
