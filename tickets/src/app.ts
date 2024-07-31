@@ -1,16 +1,18 @@
-import express from "express";
 import "express-async-errors";
+import { createTicketRouter } from "./routes/new";
+import { currentUser, errorHandler, NotFoundError } from "@mroc/ex-ms-common";
+import { indexTicketRouter } from "./routes/index";
 import { json } from "body-parser";
+import { showTicketRouter } from "./routes/show";
+import { updateTicketRouter } from "./routes/update";
 import cookieSession from "cookie-session";
 import cors from "cors";
-import { currentUser, errorHandler, NotFoundError } from "@mroc/ex-ms-common";
-import { createTicketRouter } from "./routes/new";
-import { showTicketRouter } from "./routes/show";
-import { indexTicketRouter } from "./routes/index";
-import { updateTicketRouter } from "./routes/update";
+import express from "express";
+import SWStats from "swagger-stats";
 
 const app = express();
 app.set("trust proxy", true);
+app.use(SWStats.getMiddleware({}));
 app.use(cors());
 app.use(json());
 app.use(

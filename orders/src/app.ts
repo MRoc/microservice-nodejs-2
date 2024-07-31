@@ -1,16 +1,18 @@
-import express from "express";
 import "express-async-errors";
-import { json } from "body-parser";
-import cookieSession from "cookie-session";
-import cors from "cors";
 import { currentUser, errorHandler, NotFoundError } from "@mroc/ex-ms-common";
+import { deleteOrderRouter } from "./routes/delete";
+import { indexOrderRouter } from "./routes/index";
+import { json } from "body-parser";
 import { newOrderRouter } from "./routes/new";
 import { showOrderRouter } from "./routes/show";
-import { indexOrderRouter } from "./routes/index";
-import { deleteOrderRouter } from "./routes/delete";
+import cookieSession from "cookie-session";
+import cors from "cors";
+import express from "express";
+import SWStats from "swagger-stats";
 
 const app = express();
 app.set("trust proxy", true);
+app.use(SWStats.getMiddleware({}));
 app.use(cors());
 app.use(json());
 app.use(
