@@ -44,12 +44,9 @@ kind: Service
 metadata:
   name: orders-clusterip-srv
 spec:
-  type: NodePort
-  externalTrafficPolicy: Local
   selector:
     app: orders
   ports:
     - name: orders
       protocol: TCP
       port: 3000
-      targetPort: 3000

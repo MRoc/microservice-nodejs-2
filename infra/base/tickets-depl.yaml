@@ -44,12 +44,9 @@ kind: Service
 metadata:
   name: tickets-clusterip-srv
 spec:
-  type: NodePort
-  externalTrafficPolicy: Local
   selector:
     app: tickets
   ports:
     - name: tickets
       protocol: TCP
       port: 3000
-      targetPort: 3000

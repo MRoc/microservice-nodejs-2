@@ -49,12 +49,9 @@ kind: Service
 metadata:
   name: payments-clusterip-srv
 spec:
-  type: NodePort
-  externalTrafficPolicy: Local
   selector:
     app: payments
   ports:
     - name: payments
       protocol: TCP
       port: 3000
-      targetPort: 3000

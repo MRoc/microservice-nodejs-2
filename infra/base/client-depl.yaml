@@ -39,12 +39,9 @@ kind: Service
 metadata:
   name: client-clusterip-srv
 spec:
-  type: NodePort
-  externalTrafficPolicy: Local
   selector:
     app: client
   ports:
     - name: client
       protocol: TCP
       port: 3000
-      targetPort: 3000

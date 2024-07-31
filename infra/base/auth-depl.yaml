@@ -36,12 +36,9 @@ kind: Service
 metadata:
   name: auth-clusterip-srv
 spec:
-  type: NodePort
-  externalTrafficPolicy: Local
   selector:
     app: auth
   ports:
     - name: auth
       protocol: TCP
       port: 3000
-      targetPort: 3000
