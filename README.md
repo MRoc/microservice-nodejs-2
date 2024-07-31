@@ -30,6 +30,29 @@ Notes:
   - If having problem with self signed certificate while rendering NextJS server side on windows, run `$env:NODE_TLS_REJECT_UNAUTHORIZED=0` first.
   - The PVs are located in `/mnt/wsl/data`
 
+### Helm
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm show values prometheus-community/kube-prometheus-stack > values.yaml
+helm install prometheus-helm prometheus-community/kube-prometheus-stack -f ./values.yaml
+helm install prometheus-helm prometheus-community/kube-prometheus-stack --set prometheus-node-exporter.hostRootFsMount.enabled=false
+kubectl expose deployment prometheus-helm-grafana --type=NodePort --port=3000 --name=prometheus-helm-grafana-node-port
+kubectl get svc
+kubectl apply -f ./infra/monitoring
+```
+
+User: `admin` Password: `prom-operator`
+
+```
+k port-forward prometheus-prometheus-helm-kube-prome-prometheus-0 9090
+https://localhost:9090
+```
+
+```
+sum by(mode) (rate(node_cpu_seconds_total{mode="user"}[5m]))
+sum(rate(node_network_transmit_bytes_total[5m]))
+```
 
 ### Digital Ocean
 

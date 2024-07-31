@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: payments-service-monitor
+  labels:
+    app: payments
+    release: prometheus-helm
+spec:
+  jobLabel: app
+  endpoints:
+  - interval: 30s
+    port: payments
+    path: /swagger-stats/metrics
+  selector:
+    matchLabels:
+      app: payments

@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: orders-service-monitor
+  labels:
+    app: orders
+    release: prometheus-helm
+spec:
+  jobLabel: app
+  endpoints:
+  - interval: 30s
+    port: orders
+    path: /swagger-stats/metrics
+  selector:
+    matchLabels:
+      app: orders

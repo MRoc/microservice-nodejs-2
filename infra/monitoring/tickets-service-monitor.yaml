@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: tickets-service-monitor
+  labels:
+    app: tickets
+    release: prometheus-helm
+spec:
+  jobLabel: app
+  endpoints:
+  - interval: 30s
+    port: tickets
+    path: /swagger-stats/metrics
+  selector:
+    matchLabels:
+      app: tickets
